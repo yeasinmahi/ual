@@ -1,0 +1,49 @@
+﻿@model UAL.BLL.Models.Indent
+@{
+    ViewBag.Title = "Index";
+}
+
+<script>
+    $(document).ready(function () {
+        var max_fields = 10; //maximum input boxes allowed
+        var wrapper = $(".input_fields_wrap"); //Fields wrapper
+        var add_button = $(".add_field_button"); //Add button ID
+
+        var x = 1; //initlal text box count
+        $(add_button).click(function (e) { //on add input button click
+            e.preventDefault();
+            if (x < max_fields) { //max input box allowed
+                x++; //text box increment
+                $(wrapper).append('<div><br>SIL-<input type="number" name="follow[]" min="0" required/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+            }
+        });
+
+        $(wrapper).on("click", ".remove_field", function (e) { //user click on remove text
+            e.preventDefault(); $(this).parent('div').remove(); x--;
+        })
+    });
+</script>
+<div id="main1" style="margin-left:195px">
+    @Html.ActionLink("Create Indent", "CreateIndent", new { }, new { @class = "linkX" })
+    @using (Html.BeginForm("Index","FollowUp",FormMethod.Post, new { target = "_blank" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <fieldset>
+            <legend>Get Follow-Up</legend>
+            <div class="input_fields_wrap">
+                <button class="add_field_button">Add More Fields</button>
+                <div>
+                    <span style="font-weight:bold">Indent No (Type only numbers)</span>
+                </div>
+                <div>SIL-<input type="number" name="follow[]" min="0" required></div>
+
+            </div>
+            <p>
+                <br />
+                <input type="submit" name="submitbutton1" value="Get Follow Up" />
+                <input type="submit" name="submitbutton2" value="Get Proforma Invoice" />
+            </p>
+        </fieldset>
+    }
+</div>

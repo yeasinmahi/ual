@@ -1,0 +1,249 @@
+﻿@{
+    ViewBag.Title = "UAL - Dashboard";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UAL - Dashboard</title>
+
+    <link href="/Scripts/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Scripts/css/styles.css" rel="stylesheet">
+    <!--Icons-->
+    <script src="/Scripts/js/lumino.glyphs.js"></script>
+
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .col-sm-9.col-lg-9.widget-right {
+            background-color: rgba(168, 214, 234, 0.2);
+        }
+        .panel-widget:hover {
+            width: 370px;
+            background-color: #D1E4E7;
+        }
+        .easypiechart-panel:hover{
+            background-color:#D1E4E7;
+        }
+        body {
+            font-family: Calibri;
+        }
+        .col-xs-15,
+        .col-sm-15,
+        .col-md-15,
+        .col-lg-15 {
+            position: relative;
+            min-height: 1px;
+            padding-right: 10px;
+            padding-left: 10px;
+        }
+        .col-xs-15 {
+            width: 20%;
+            float: left;
+        }
+
+        @@media (min-width: 768px) {
+            .col-sm-15 {
+                width: 20%;
+                float: left;
+            }
+        }
+
+        @@media (min-width: 992px) {
+            .col-md-15 {
+                width: 20%;
+                float: left;
+            }
+        }
+
+        @@media (min-width: 1200px) {
+            .col-lg-15 {
+                width: 20%;
+                float: left;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main1" style="margin-left:195px">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Admin Dashboard</h1>
+            </div>
+        </div><!--/.row-->
+
+        <div class="row">
+            <div class="col-xs-12 col-md-6 col-lg-4">
+                <div class="panel panel-blue panel-widget ">
+                    <div class="row no-padding">
+                        <div class="col-sm-3 col-lg-3 widget-left large">
+                            @Session["TotalPending"]
+                        </div>
+                        <div class="col-sm-9 col-lg-9 widget-right">
+                            <div class="text-muted">Pending Samples</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-4">
+                <div class="panel panel-orange panel-widget">
+                    <div class="row no-padding">
+                        <div class="col-sm-3 col-lg-3 widget-left large">
+                            @Session["TotalPendingInFactory"]
+                        </div>
+                        <div class="col-sm-9 col-lg-9 widget-right">
+                            <div class="text-muted">Pending In Factory</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-4">
+                <div class="panel panel-teal panel-widget">
+                    <div class="row no-padding">
+                        <div class="col-sm-3 col-lg-3 widget-left large">
+                            @Session["TotalDeliveredToUAL"]
+                        </div>
+                        <div class="col-sm-9 col-lg-9 widget-right">
+                            <div class="text-muted">Ready for Buyer</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-4">
+                <div class="panel panel-yellow panel-widget">
+                    <div class="row no-padding">
+                        <div class="col-sm-3 col-lg-3 widget-left large">
+                            @Session["TotalSendForApproval"]
+                        </div>
+                        <div class="col-sm-9 col-lg-9 widget-right">
+                            <div class="text-muted">Pending for Approval</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-4">
+                <div class="panel panel-green panel-widget">
+                    <div class="row no-padding">
+                        <div class="col-sm-3 col-lg-3 widget-left large">
+                            @Session["TotalApproved"]
+                        </div>
+                        <div class="col-sm-9 col-lg-9 widget-right">
+                            <div class="text-muted">Approved</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-4">
+                <div class="panel panel-red panel-widget">
+                    <div class="row no-padding">
+                        <div class="col-sm-3 col-lg-3 widget-left large">
+                            @Session["TotalSendForApproval"]
+                        </div>
+                        <div class="col-sm-9 col-lg-9 widget-right">
+                            <div class="text-muted">Under Correction</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--/.row-->
+
+        @*<div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Site Traffic Overview</div>
+                    <div class="panel-body">
+                        <div class="canvas-wrapper">
+                            <canvas class="main-chart" id="line-chart" height="200" width="600"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@<!--/.row-->
+
+        <div class="row">
+            <div class="col-md-15 col-xs-6 col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-body easypiechart-panel">
+                        <h4>Total Orders</h4>
+                        <div class="easypiechart" id="easypiechart-blue" data-percent="@Session["TotalOrders"]">
+                            <span class="percent">@Session["TotalOrders"]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-15 col-xs-6 col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-body easypiechart-panel">
+                        <h4>Artworks</h4>
+                        <div class="easypiechart" id="easypiechart-orange" data-percent="@Session["TotalArtworks"]">
+                            <span class="percent">@Session["TotalArtworks"]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-15 col-xs-6 col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-body easypiechart-panel">
+                        <h4>Total Users</h4>
+                        <div class="easypiechart" id="easypiechart-teal" data-percent="@Session["TotalUsers"]">
+                            <span class="percent">@Session["TotalUsers"]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-15 col-xs-6 col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-body easypiechart-panel">
+                        <h4>Buyers</h4>
+                        <div class="easypiechart" id="easypiechart-red" data-percent="@Session["TotalBuyers"]">
+                            <span class="percent">@Session["TotalBuyers"]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-15 col-xs-6 col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-body easypiechart-panel">
+                        <h4>Total Disregarded</h4>
+                        <div class="easypiechart" id="easypiechart-red" data-percent="@Session["TotalDisregarded"]">
+                            <span class="percent">@Session["TotalDisregarded"]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--/.row-->
+
+    </div>	<!--/.main-->
+    <script src="/Scripts/js/jquery-1.11.1.min.js"></script>
+    <script src="/Scripts/js/bootstrap.min.js"></script>
+    <script src="/Scripts/js/chart.min.js"></script>
+    <script src="/Scripts/js/chart-data.js"></script>
+    <script src="/Scripts/js/easypiechart.js"></script>
+    <script src="/Scripts/js/easypiechart-data.js"></script>
+    <script src="/Scripts/js/bootstrap-datepicker.js"></script>
+    <script>
+        $('#calendar').datepicker({
+        });
+
+        !function ($) {
+            $(document).on("click", "ul.nav li.parent > a > span.icon", function () {
+                $(this).find('em:first').toggleClass("glyphicon-minus");
+            });
+            $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+        }(window.jQuery);
+
+        $(window).on('resize', function () {
+            if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+        })
+        $(window).on('resize', function () {
+            if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+        })
+    </script>
+</body>
+
+</html>

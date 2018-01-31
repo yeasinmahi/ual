@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#issuedate").datepicker({
+            dateFormat: 'MM-yy', changeMonth: true,
+            changeYear: true, showButtonPanel: true,
+            onClose: function (dateText, inst) {
+                $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+            }
+        });
+    });
+</script>
+<style>
+    .ui-datepicker-calendar {
+        display: none;
+    }
+</style>
+<div id="main1" style="margin-left:195px">
+    @Html.ActionLink("CREATE UAL WORK ORDER", "Create", new { }, new { @class = "btn btn-default" })
+    @using (Html.BeginForm("SalesList", "Sales", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <select id="label" name="label" required class="ddl">
+            <option>WOVEN</option>
+            <option>NEEDLE</option>
+            <option>PRINTED</option>
+            <option>OFFSET</option>
+            <option>RIBBON</option>
+        </select>
+        <input type="text" id="issuedate" name="issuedate" required/>
+    <input type="submit" class="btn btn-default" value="Get Sales Report" />
+
+    }
+</div>

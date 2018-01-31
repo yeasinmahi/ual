@@ -1,0 +1,113 @@
+﻿@model IEnumerable<UAL.BLL.Models.Order>
+
+@{
+    ViewBag.Title = "WorkOrderList";
+}
+
+<div id="main1" style="margin-left:195px">
+    <p>
+        @Html.ActionLink("Create New Work Order", "Index", new { }, new { @class = "linkX" })
+    </p>
+    <h2>List of Work Orders</h2>
+
+    <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th></th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderRef)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderRefNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustomerName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeliveryPlace)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeliveryDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TOCompany)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FROMCompany)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Attn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AccessoryType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderQty)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Remark)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReferenceNo)
+                </th>
+                
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink("Work Order", "WorkOrder", new { order = item.OrderRef }) |
+                        @Html.ActionLink("Edit", "Edit", new { order = item.OrderRef })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderRef)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderRefNo)
+                    </td>
+                    <td>
+                        @item.Date.ToString("dd.MM.yy")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DeliveryPlace)
+                    </td>
+                    <td>
+                        @item.DeliveryDate.ToString("dd.MM.yy")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TOCompany)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FROMCompany)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Attn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AccessoryType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderQty)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Remark)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReferenceNo)
+                    </td>
+                    
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>

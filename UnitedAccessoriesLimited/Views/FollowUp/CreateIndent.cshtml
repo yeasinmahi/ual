@@ -1,0 +1,82 @@
+﻿@model UAL.BLL.Models.Indent
+
+@{
+    ViewBag.Title = "CreateIndent";
+}
+<script>
+    $(document).ready(function () {
+        var max_fields = 10; //maximum input boxes allowed
+        var wrapper = $(".input_fields_wrap"); //Fields wrapper
+        var add_button = $(".add_field_button"); //Add button ID
+
+        var x = 1; //initlal text box count
+        $(add_button).click(function (e) { //on add input button click
+            e.preventDefault();
+            if (x < max_fields) { //max input box allowed
+                x++; //text box increment
+                $(wrapper).append('<div><br><input type="text" name="workOrder[]"/> <input type="text" name="refN[]"/> <a href="#" class="remove_field">Remove</a></div>'); //add input box
+            }
+        });
+
+        $(wrapper).on("click", ".remove_field", function (e) { //user click on remove text
+            e.preventDefault(); $(this).parent('div').remove(); x--;
+        })
+    });
+</script>
+<div id="main1" style="margin-left:195px">
+    <h2>CreateIndent</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Indent</legend>
+            <div class="input_fields_wrap">
+                <button class="add_field_button">Add More Fields</button>
+                <div>
+                    <span style="font-weight:bold">Work Order Reference</span>
+                    <span style="font-weight: bold;margin-left:150px">Buyer Reference #</span>
+                </div>
+                <div><input type="text" name="workOrder[]"> <input type="text" name="refN[]"></div>
+                
+            </div>
+            @*<div class="editor-label">
+                    @Html.LabelFor(model => model.IndentNo)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.IndentNo)
+                    @Html.ValidationMessageFor(model => model.IndentNo)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.WorkOrder)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.WorkOrder)
+                    @Html.ValidationMessageFor(model => model.WorkOrder)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.ReferenceNo)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.ReferenceNo)
+                    @Html.ValidationMessageFor(model => model.ReferenceNo)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Status)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Status)
+                    @Html.ValidationMessageFor(model => model.Status)
+                </div>*@
+
+            <p>
+                <br />
+                <input type="submit" value="Create" />
+            </p>
+        </fieldset>
+    }
+</div>

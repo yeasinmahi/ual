@@ -1,0 +1,84 @@
+﻿@model UAL.BLL.Models.Breakdown
+
+@{
+    ViewBag.Title = "CreatePO";
+}
+<div style="margin-left:195px" id="main1">
+    @if(Session["PoCreated"] != null){
+        Session["PoCreated"].ToString();
+        }
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Breakdown</legend>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.PONumber)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.PONumber)
+                @Html.ValidationMessageFor(model => model.PONumber)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Style1)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Style1)
+                @Html.ValidationMessageFor(model => model.Style1)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Style2)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Style2)
+                @Html.ValidationMessageFor(model => model.Style2)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Style3)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Style3)
+                @Html.ValidationMessageFor(model => model.Style3)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Color)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Color)
+                @Html.ValidationMessageFor(model => model.Color)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ReferenceNo)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ReferenceNo)
+                @Html.ValidationMessageFor(model => model.ReferenceNo)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.OrderNo)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.OrderNo)
+                @Html.ValidationMessageFor(model => model.OrderNo)
+            </div>
+
+            <p>
+                <input type="submit" value="Create" />
+            </p>
+        </fieldset>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>

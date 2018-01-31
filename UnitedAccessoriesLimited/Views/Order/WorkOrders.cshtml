@@ -1,0 +1,261 @@
+﻿@model IEnumerable<UAL.BLL.Models.Sale>
+<style>
+    .active {
+        background-color: rgba(0,0,0,0);
+    }
+
+    .tab ul {
+        background-color: #CDD8DA;
+    }
+
+
+    li a {
+        color: black;
+        
+    }
+
+    li a .active {
+        background-color: #111;
+        color: black;
+
+    }
+       
+         li a:hover:not(.active) {
+            border: 1px solid black;
+            background-color: rgba(110, 210, 242, 0.54);
+        }
+    .nav-tabs > li.active > a,
+    .nav-tabs > li.active > a:hover,
+    .nav-tabs > li.active > a:focus {
+        color: #555555;
+        cursor: default;
+        background-color: rgba(110, 210, 242, 0.54);
+        border: 1px solid #dddddd;
+        border-bottom-color: transparent;
+    } 
+</style>
+@{
+    ViewBag.Title = "WorkOrders";
+}
+<div id="main1" style="margin-left:195px">
+    <h2>WorkOrders</h2>
+    @*<p>
+        @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn btn-primary" })
+    </p>*@
+    <ul class="nav nav-tabs nav-justified">
+
+        <li style="background-color: #CDD8DA;" class="tab active"><a data-toggle="tab" href="#pendings">Pending</a></li>
+        <li style="background-color: #CDD8DA;" class="tab"><a data-toggle="tab" href="#menu2">Completed</a></li>
+    </ul>
+
+    <div class="tab-content">
+
+        <div id="pendings" class="tab-pane fade in active">
+            <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Label)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.WO)
+                        </th>
+                        <th></th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Buyer)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UALFileName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LabelType)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LabelName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Version)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.BuyersRef)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.OrderQty)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Cutter)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Beam)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TotalAmount)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.ProductionHours)
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        if (item.Status == "Pending")
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Label)
+                                </td>
+                                <td>
+                                    @Html.ActionLink(item.WO, "Stock", new { woId = item.WO }, new { @class = "btn btn-default", target = "_blank" })
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Order Completed?", "Completed", new { woId = item.WO }, new { @class = "btn btn-default" })
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Buyer)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UALFileName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LabelType)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LabelName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Version)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.BuyersRef)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderQty)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Cutter)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Beam)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TotalAmount)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProductionHours)
+                                </td>
+
+                            </tr>
+                        }
+                    }
+                </tbody>
+
+            </table>
+        </div>
+        <div id="menu2" class="tab-pane fade">
+            <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Label)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.WO)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Buyer)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UALFileName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LabelType)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LabelName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Version)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.BuyersRef)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.OrderQty)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Cutter)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Beam)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TotalAmount)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.ProductionHours)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        if (item.Status == "Completed")
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Label)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.WO)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Buyer)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UALFileName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LabelType)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LabelName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Version)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.BuyersRef)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderQty)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Cutter)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Beam)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TotalAmount)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProductionHours)
+                                </td>
+
+                            </tr>
+                        }
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+
+</div>

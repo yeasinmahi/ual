@@ -1,0 +1,91 @@
+﻿@model IEnumerable<UAL.BLL.DataModel.Sample>
+
+@{
+    ViewBag.Title = "PendingSamples";
+}
+
+<div id="main1" style="margin-left:195px;">
+    <h2>Pending Samples</h2>
+    <div style="color:green; font-size:12px">
+        @TempData["sendToFactory"]
+    </div>
+    <p>
+        @Html.ActionLink("Create New", "DropFiles", new { }, new { @class = "btn btn-default" })
+    </p>
+    <table class="table  table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Buyer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Brand)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Label)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Reference)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Combo)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.comments)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.version)
+                </th>
+                <th>Uploaded Sample</th>
+
+            </tr>
+        </thead>
+
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Buyer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Brand)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Label)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.ActionLink(item.Reference, "sampleDetails", new { refN = item.Reference }, new { @class = "btn btn-default", target = "_blank" })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Combo)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.comments)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.version)
+                    </td>
+                    <td>
+                        @Html.ActionLink("View Sample", "viewSample", new { label = item.Label, refN = item.Reference, combo = item.Combo, buyer = item.Buyer, doS = item.dateOfSubmission }, new { @class="btn btn-default", target = "_blank" }) |
+                        @Html.ActionLink("Send to Factory", "sendToFactory", new { refN = item.Reference }, new { @class = "btn btn-default" })
+                        @*@Html.ActionLink("New tab", "viewSample", new { label = item.Label, refN = item.Reference, combo = item.Combo, buyer = item.Buyer, doS = item.dateOfSubmission }, new { target = "_blank" })*@
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+
+    </table>
+</div>

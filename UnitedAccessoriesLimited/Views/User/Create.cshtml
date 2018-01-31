@@ -1,0 +1,61 @@
+﻿@model UAL.BLL.Models.User
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div id="main1" style="margin-left:195px;">
+    @Session["UserCreated"]
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Create User</legend>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UserName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UserName)
+                @Html.ValidationMessageFor(model => model.UserName)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Role.RoleName)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.Role.RoleName, new List<SelectListItem>
+{
+  new SelectListItem{ Text = "Admin", Value = "Admin" },
+  new SelectListItem{ Text = "Customer", Value = "Customer" },
+  new SelectListItem{ Text = "General", Value = "General" },
+},
+                    "---Select User Role---", new { @class = "ddl" })
+                @Html.ValidationMessageFor(model => model.Role.RoleName)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Email)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.Email, new { @type = "email", required = "required" })
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Password)
+            </div>
+            <div class="editor-field">
+                @Html.PasswordFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+
+            <p>
+                <input type="submit" value="Create" />
+            </p>
+        </fieldset>
+    }
+
+</div>

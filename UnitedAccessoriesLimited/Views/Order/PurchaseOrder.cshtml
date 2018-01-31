@@ -1,0 +1,113 @@
+﻿@model IEnumerable<UAL.BLL.Models.PurchaseOrder>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PurchaseOrder</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        #center{
+            text-align : center;
+        }
+        table{
+            border: 1px solid black;
+        }
+        th{
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-wrapper">
+        <div class="row" id="center">
+            <div class="col-md-12">
+                <h4>@Session["FromCompany"]</h4>
+                <u>ADDRESS: House # 00, Sector # 00, PIN CODE: 00000000</u>
+                <br />
+                <h3 style="text-decoration:underline; font-weight:bold">PURCHASE ORDER</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4" style="width:33%">
+                <table class="table table-bordered">
+                    <tr>
+                        <td>To:</td>
+                        <td>@Session["ToCompany"]</td>
+                    </tr>
+                    <tr><td>ATTN:</td><td>@Session["Attn"]</td></tr>
+                </table>
+            </div>
+            <div class="col-xs-4" style="width:33%">
+
+            </div>
+            <div class="col-xs-4" style="width:33%">
+                <table class="table table-bordered">
+                    <tr><td>ORD.REF:</td><td>@Session["OrderRef"]</td></tr>
+                    <tr><td>ISSUEDATE:</td><td>@Session["IssueDate"]</td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>PO #</th>
+                        <th>Style #</th>
+                        <th>SL #</th>
+                        <th>ITEM</th>
+                        <th>BUYER'S REF #</th>
+                        <th>Combo</th>
+                        <th>Size Wise Qty. B/D</th>
+                        <th>Total ORD.QTY. (Pcs)</th>
+                        <th>REMARKS</th>
+                    </tr>
+                    @{int sl = 1;}
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PO)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Style)
+                            </td>
+                            <td>
+                                @sl
+                                @{sl++;}
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem=>item.ArtWorkUpload.itemDescription)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Ref)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ArtWorkUpload.combo)
+                            </td>
+                            <td>
+                                Please follow the attached @Html.ActionLink("BREAKDOWN", "BreakDown", new { id = item.ID }, new { target = "_blank"}) sheet.
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OrderQty)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Remarks)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>

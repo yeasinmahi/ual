@@ -1,0 +1,225 @@
+﻿@model IEnumerable<UAL.BLL.Models.Indent>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FOLLOW-UP</title>
+    <style>
+        body {
+            font-family: Calibri;
+            margin-left: 3%;
+            margin-right: 3%;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        #list td {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #list tr th {
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        #list tr td {
+            border: 1px solid black;
+            text-align: center;
+        }
+
+
+        #head{
+            margin-bottom: 10px;
+        }
+         #head tr td {
+            border: 2px solid black;
+            text-align: right;
+        }
+         #foot tr td{
+             border: 1px solid black;
+         }
+    </style>
+    <style type="text/css" media="print">
+        @@page {
+            size: auto; /* auto is the initial value */
+            margin: 0; /* this affects the margin in the printer settings */
+        }
+    </style>
+</head>
+<body>
+    <h2 style="text-align:center;text-decoration:underline">FOLLOW-UP</h2>
+    <span style="float:right">@DateTime.Now.ToString("dd MMMM, yyyy")</span>
+    @{int i = 1;
+      double total = 0;}
+    <table id="head">
+        <tr>
+            <td width="65px" style="border:0px"></td>
+            <td>
+                @{
+                var result = Model.Select(m=>m.Order.CustomerName).ToList().FirstOrDefault();
+                var ls = Model.Select(m => m.IndentNo).Distinct();
+            }
+                @Html.DisplayFor(modelItem => result)
+                // Indent No. SIL- 
+            @foreach (var item in ls)
+            {
+                if (item != ls.Last()) { 
+                <span>@item,&nbsp;</span>
+            }
+                else
+                {
+                    <span> & @item</span>
+                }
+              
+            }
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -2016</span>
+        </td>
+    </tr>
+
+</table>
+<table id="list" cellpadding="0" cellspacing="0">
+    <tr>
+        <th>
+            IND. #
+        </th>
+        <th>SL #</th>
+        <th>Item Description</th>
+        <th>
+            Buyer's Ref.
+        </th>
+        <th>
+            COM.
+        </th>
+        <th>
+            Quantity In Pcs.
+        </th>
+        <th>
+            UAL W/O # & Date.
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+
+    </tr>
+    @{var x = Model.ToList().FirstOrDefault();}
+    @foreach (var item in Model)
+    {
+        total = total + item.Order.OrderQty * Convert.ToDouble(item.ArtWorkUpload.Price);
+        int rowspan = 1;
+        if (item.IndentNo != x.IndentNo || i == 1)
+        {
+            <tr style="height:20px; border:0px">
+                <td style="border:0px; border-left:1px solid black"> </td>
+                <td style="border:0px"> </td>
+                <td style="border:0px"> </td>
+                <td style="border:0px"> </td>
+                <td style="border:0px"> </td>
+                <td style="border:0px"> </td>
+                <td style="border:0px"> </td>
+                <td style="border:0px"> </td>
+                <td style="border:0px"> </td>
+            </tr>
+        }
+        x = item;
+        <tr>
+
+            <td rowspan="@rowspan">
+                SIL-@Html.DisplayFor(modelItem => item.IndentNo)
+            </td>
+            <td>
+                @i
+                @{i++;}
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArtWorkUpload.itemDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReferenceNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArtWorkUpload.combo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.OrderQty)
+            </td>
+            <td style="text-align:right;padding-right:10px">
+                @Html.DisplayFor(modelItem => item.WorkOrder)
+                <span style="font-size:8px"><br /> DT-@item.Order.Date.ToString("dd.MM.yy")</span>
+            </td>
+            @{if (DateTime.Now.Date > @item.Order.DeliveryDate)
+            {
+                <td>
+                    Ready to dispatch
+                </td>
+            }
+            else if (DateTime.Now.Date < @item.Order.DeliveryDate)
+            {
+                <td style="background-color:#bfbfbf">
+                    Will be ready on @item.Order.DeliveryDate.ToString("dd.MM.yy")
+                </td>
+            }
+            else
+            {
+                <td>
+                    Already DISPATCHED
+                </td>
+            }
+            }
+
+
+        </tr>
+    }
+
+</table>
+    <table id="foot" style="text-align: right; width: 60%; float: left; margin-top: 30px" cellspacing="0">
+        <tr>
+            <td style="padding-right:5px">PI issue & Sent</td>
+            <td width="40%"></td>
+        </tr>
+        <tr>
+            <td style="padding-right:5px">Signed PI Rcvd.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td style="padding-right:5px">TT Rcvd</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td style="padding-right:5px">EXP</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td style="padding-right:5px">SHPT. MODE</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td style="padding-right:5px">Forwarder</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td style="padding-right:5px">DELIVERED</td>
+            <td></td>
+        </tr>
+    </table>
+    <table style="float: right; border: 2px solid black; margin-top: 30px;width:30%">
+        <tr>
+            <td style="text-align:left; border-right:2px solid black">
+                <b>TOTAL =</b>
+            </td>
+            <td style="text-align:right">
+                $@total
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

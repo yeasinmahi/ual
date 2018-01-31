@@ -1,0 +1,84 @@
+﻿@model IEnumerable<UAL.BLL.Models.ArtWorkUpload>
+
+@{
+    ViewBag.Title = "ApprovedSamples";
+}
+<div style="margin-left:195px" id="main1">
+    <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>
+                    REFERENCE
+                </th>
+                <th>
+                    DEPARTMENT
+                </th>
+                <th>
+                    VERSION
+                </th>
+                <th>
+                    COMBO
+                </th>
+                <th>
+                    ITEM DESCRIPTION
+                </th>
+                <th>
+                    BRAND
+                </th>
+                <th>
+                    Receiving Date
+                </th>
+                <th>
+                    Approval Date
+                </th>
+                <th>
+                    BUYER
+                </th>
+                <th>
+                    COMMENTS
+                </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.refNumber, "sampleDetails", new { refN = item.refNumber }, new {@class = "btn btn-default", target = "_blank" })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.label)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.version)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.combo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.itemDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.brand)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dateOfSubmission)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateOfApproval)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.buyer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.comments)
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>

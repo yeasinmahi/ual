@@ -1,0 +1,133 @@
+﻿@model IEnumerable<UAL.BLL.DataModel.Pricelist>
+
+@{
+    ViewBag.Title = "PriceList";
+}
+<style>
+    table {
+        border : 1px;
+    }
+</style>
+@*<input type="button" onclick="ExportToExcel()" value="Export To Excel" style="margin-left:195px" />*@
+<div id="main1" style="margin-left:195px">
+    @*<h2>Union Accessories Limited</h2>
+    <h5 style="text-decoration: underline !important">Uttara, Dhaka</h5>
+    <h2>Price List</h2>
+    <h3>Brand: </h3>
+    <h4 style="text-decoration: underline !important">Category: WOVEN LABELS (US Version)</h4>*@
+    <table id="tableID" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>SL#</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Reference)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Combo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Finishing)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Brand)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Division)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    APPROVAL DATE
+                </th>
+                <th>
+                    SENT FOR APPROVAL DATE
+                </th>
+                <th>
+                    APPROVED BY
+                </th>
+                <th>
+                    Sample
+                </th>
+            </tr>
+        </thead>
+        @{int i = 1;}
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <span>@i</span>
+                        @{i++;
+                        }
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.ActionLink(item.Reference, "sampleDetails", new { refN = item.Reference }, new {@class = "btn btn-default", target = "_blank" })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Combo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Finishing)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Brand)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Division)
+                    </td>
+                    <td>
+                        $@Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApprovalDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sentForApprovalDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApprovedBy)
+                    </td>
+                    <td>
+                        @{string und = "_"; string ext = ".jpg"; string ext2 = ".png";}
+                        <img id="iframe" src='~/NewFolder2/@item.label@und@item.Reference@und@item.Combo@und@item.buyer@und@item.dateOfSubmission.ToString("dd-MM-yyyy")@ext'
+                             alt="Image not found" onerror="this.onerror = null; src = '/NewFolder2/@item.label@und@item.Reference@und@item.Combo@und@item.buyer@und@item.dateOfSubmission.ToString("dd-MM-yyyy")@ext2';"
+                             height="30" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+<script type="text/javascript">
+    function ExportToExcel() {
+        var dt = new Date();
+        var day = dt.getDate();
+        var month = dt.getMonth() + 1;
+        var year = dt.getFullYear();
+        var hour = dt.getHours();
+        var mins = dt.getMinutes();
+        var postfix = day + "." + month + "." + year + "_" + hour + "." + mins;
+        //creating a temporary HTML link element (they support setting file names)
+        var a = document.createElement('a');
+        //getting data from our div that contains the HTML table
+        var data_type = 'data:application/vnd.ms-excel' ;
+        var table_div = document.getElementById('tableID');
+        var table_html = table_div.outerHTML.replace(/ /g, '%20');
+        a.href = data_type + ', ' + table_html;
+        //setting the file name
+        a.download = 'PriceList_' + postfix + '.xls';
+        //triggering the function
+        a.click();
+        //just in case, prevent default behaviour
+        e.preventDefault();
+    }
+</script>

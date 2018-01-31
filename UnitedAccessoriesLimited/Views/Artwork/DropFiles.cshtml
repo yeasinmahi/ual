@@ -1,0 +1,177 @@
+﻿@model UAL.BLL.DataModel.Sample
+
+@{
+    ViewBag.Title = "DropFiles";
+}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#date").datepicker({ dateFormat: 'dd-MM-yy' });
+        $("#deliveryDate").datepicker({ dateFormat: 'dd-MM-yy' });
+    });
+</script>
+<div style="margin-left:195px">
+    
+</div>
+@using (Html.BeginForm("Upload", "Artwork", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    
+    <fieldset id="main1" style="margin-left:195px; margin-top:100px;">
+        @TempData["Submitted"]
+        <legend>Upload Art work</legend>
+        <table>
+            <tr>
+                <td class="editor-label">
+                    @Html.LabelFor(model => model.Reference)
+                </td>
+                <td class="editor-field">
+                    @Html.EditorFor(model => model.Reference)
+                    @Html.ValidationMessageFor(model => model.Reference)
+
+                </td>
+            </tr>
+            <tr>
+                <td class="editor-label">
+                    @Html.LabelFor(model => model.Description)
+                </td>
+                <td class="editor-field">
+                    @Html.EditorFor(model => model.Description, new { required = "required" })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </td>
+            </tr>
+            <tr>
+                <td class="editor-label">
+                    <label>DEPARTMENT</label>
+                </td>
+                <td class="editor-field">
+                    @Html.DropDownListFor(model => model.Label, new List<SelectListItem>
+                 { new SelectListItem{Text="Woven Department", Value="Woven Department"},
+                 new SelectListItem{Text="Printed Department", Value="Printed Department"},
+                 new SelectListItem{Text="Offset Department",Value="Offset Department"}}, "Select Department...", new { @class = "ddl" })
+                    @Html.ValidationMessageFor(model => model.Label)
+                </td>
+            </tr>
+            <tr>
+                <td class="editor-label">
+                    @Html.LabelFor(model => model.Combo)
+                </td>
+                <td class="editor-field">
+                    @Html.DropDownListFor(model => model.Combo, new List<SelectListItem>
+       {
+           new SelectListItem{Text="A", Value="A"},
+           new SelectListItem{Text="B", Value="B"},
+           new SelectListItem{Text="C", Value="C"},
+           new SelectListItem{Text="D", Value="D"},
+           new SelectListItem{Text="E", Value="E"},
+           new SelectListItem{Text="F", Value="F"},
+           new SelectListItem{Text="G", Value="G"},
+           new SelectListItem{Text="H", Value="H"},
+           new SelectListItem{Text="I", Value="I"},
+           new SelectListItem{Text="J", Value="J"},
+           new SelectListItem{Text="K", Value="K"},
+           new SelectListItem{Text="L", Value="L"},
+           new SelectListItem{Text="1", Value="1"},
+           new SelectListItem{Text="2", Value="2"},
+           new SelectListItem{Text="3", Value="3"},
+           new SelectListItem{Text="4", Value="4"},
+           new SelectListItem{Text="5", Value="5"},
+
+       }, "Select Combo...", new { @class = "ddl" })
+
+
+                    @Html.ValidationMessageFor(model => model.Combo)
+                </td>
+            </tr>
+            <tr>
+                <td class="editor-label">
+                    @Html.LabelFor(model => model.version)
+                </td>
+                <td class="editor-field">
+                    @Html.DropDownListFor(model => model.version, new List<SelectListItem>
+       {
+           new SelectListItem{Text="US Version", Value="US Version"},
+           new SelectListItem{Text="Canada Version", Value="Canada Version"},
+
+       }, "Select Version...", new { @class = "ddl" })
+                    @Html.ValidationMessageFor(model => model.version)
+                </td>
+            </tr>
+            <tr>
+                <td class="editor-label">
+                    @Html.LabelFor(model => model.Brand)
+                </td>
+                <td class="editor-field">
+                    @Html.EditorFor(model => model.Brand)
+                    @Html.ValidationMessageFor(model => model.Brand)
+                </td>
+            </tr>
+            <tr>
+                <td class="editor-label">
+                    @Html.LabelFor(model => model.Buyer)
+                </td>
+                <td class="editor-field">
+                    @Html.EditorFor(model => model.Buyer)
+                    @Html.ValidationMessageFor(model => model.Buyer)
+                </td>
+            </tr>
+            <tr>
+                <td class="editor-label">
+                    @Html.LabelFor(model => model.comments)
+                </td>
+                <td class="editor-label">
+                    <textarea rows="4" cols="30" id="comments" name="comments"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class="editor-label">
+                    <label>Artwork Receiving Date</label>
+                </td>
+                <td class="editor-label">
+                    <input type="text" id="date" name="date" required />
+
+                </td>
+
+            </tr>
+            <tr>
+                <td class="editor-label">
+                    <label>Artwork Received From</label>
+                </td>
+                <td class="editor-label">
+                    @Html.EditorFor(model => model.ReceivedFrom)
+                    @Html.ValidationMessageFor(model => model.ReceivedFrom)
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <input type="file" name="file" onchange="getFileName()" required />
+                </td>
+                <td id="fileName">
+                    @TempData["FileName"]
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" name="Submit" id="Submit" class="mySubmit" value="Submit Sample" onclick="disableSubmit()" />
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+}
+
+<script>
+    function getFileName() {
+        var fileN = $('input[type=file]').val();
+        fileN = fileN.slice(12);
+        document.getElementById("fileName").innerHTML = fileN;
+    }
+    function disableSubmit() {
+        document.getElementById("Submit").hidden = true;
+    }
+</script>

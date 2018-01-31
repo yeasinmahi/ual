@@ -1,0 +1,67 @@
+﻿@model UAL.BLL.Models.Payment
+
+@{
+    ViewBag.Title = "Payment";
+}
+<div id="main1" style="margin-left:195px">
+    <h2>Payment</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Payment</legend>
+
+            <div class="editor-label">
+                Bank Name
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.PaymentMethod)
+                @Html.ValidationMessageFor(model => model.PaymentMethod)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.BankAddress)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.BankAddress)
+                @Html.ValidationMessageFor(model => model.BankAddress)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Swift)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Swift)
+                @Html.ValidationMessageFor(model => model.Swift)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.AccountNo)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.AccountNo)
+                @Html.ValidationMessageFor(model => model.AccountNo)
+            </div>
+
+            <p>
+                <input type="submit" value="Submit" />
+            </p>
+            @if (Session["PaymentSub"] != null && Session["PaymentSub"].ToString() == "Yes")
+            {
+                using (Html.BeginForm("ProformaInvoice", "FollowUp", FormMethod.Post, new { target = "_blank" }))
+                {
+
+                    <p>
+                        <br />
+                        <input type="submit" name="submitbutton1" value="Get ProformaInvoice" />
+
+                    </p>
+
+                }
+            }
+        </fieldset>
+    }
+</div>

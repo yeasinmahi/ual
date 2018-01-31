@@ -1,0 +1,16 @@
+﻿@model UAL.BLL.Models.Breakdown
+@{
+    ViewBag.Title = "BreakDownList";
+}
+
+<div id="main1" style="margin-left:195px">
+    @Html.ActionLink("Create PO", "CreatePO", new { }, new { @class = "linkX" })
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <label>Reference Number</label>
+        @Html.EditorFor(model => model.ReferenceNo)
+        <input type="submit" value="Get Breakdown List" />
+    }
+</div>

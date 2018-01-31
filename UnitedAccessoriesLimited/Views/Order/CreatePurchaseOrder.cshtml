@@ -1,0 +1,436 @@
+﻿<style>
+    .row {
+        margin-bottom: 5px;
+    }
+    input[type="text"]{
+        width:100%;
+    }
+    #submit {
+        width: 100%;
+    }
+    .hideshow{
+        display:none;
+    }
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#issuedate").datepicker({ dateFormat: 'dd-MM-yy' });
+    });
+</script>
+@model UAL.BLL.Models.PurchaseOrder
+@{
+    ViewBag.Title = "Create Purchase Order";
+}
+<div id="main1" style="margin-left:195px">
+    @Session["POCreated"]
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Create Purchase Order Item</legend>
+            <div class="row">
+                <div class="col-xs-2">
+                    @Html.LabelFor(model => model.PO)
+                </div>
+                <div class="col-xs-4">
+                    @Html.EditorFor(model => model.PO)
+                    @Html.ValidationMessageFor(model => model.PO)
+                </div>
+
+                <div class="col-xs-2">
+                    @Html.LabelFor(model => model.Style)
+                </div>
+                <div class="col-xs-4">
+                    @Html.EditorFor(model => model.Style)
+                    @Html.ValidationMessageFor(model => model.Style)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">
+                    @Html.LabelFor(model => model.Ref)
+                </div>
+                <div class="col-xs-4">
+                    @Html.EditorFor(model => model.Ref)
+                    @Html.ValidationMessageFor(model => model.Ref)
+                </div>
+
+                <div class="col-xs-2">
+                    <label>ORDER QTY</label>
+                </div>
+                <div class="col-xs-4">
+                    @Html.EditorFor(model => model.OrderQty)
+                    @Html.ValidationMessageFor(model => model.OrderQty)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">
+                    <label>To Company</label>
+                </div>
+                <div class="col-xs-4">
+                    @Html.EditorFor(model => model.ToCompany)
+                    @Html.ValidationMessageFor(model => model.ToCompany)
+                </div>
+                <div class="col-xs-2">
+                    <label>From Company</label>
+                </div>
+                <div class="col-xs-4">
+                    @Html.EditorFor(model => model.FromCompany)
+                    @Html.ValidationMessageFor(model => model.FromCompany)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">
+                    <label>ATTN</label>
+                </div>
+                <div class="col-xs-4">
+                    @Html.EditorFor(model => model.Attn)
+                    @Html.ValidationMessageFor(model => model.Attn)
+                </div>
+                <div class="col-xs-2">
+                    <label>ORD. REF</label>
+                </div>
+                <div class="col-xs-4">
+                    @Html.EditorFor(model => model.OrderRef)
+                    @Html.ValidationMessageFor(model => model.OrderRef)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">
+                    @Html.LabelFor(model => model.Remarks)
+                </div>
+                <div class="col-xs-4">
+                    @Html.EditorFor(model => model.Remarks)
+                    @Html.ValidationMessageFor(model => model.Remarks)
+                </div>
+                <div class="col-xs-2">
+                    @Html.LabelFor(model => model.IssueDate)
+                </div>
+                <div class="col-xs-2">
+                    <input type="text" id="issuedate" name="issuedate" />
+                </div>
+                <div class="col-xs-1">
+                    <label>Sizewise QTY. B/D:</label>
+                </div>
+                <div class="col-xs-1">
+                    <input type="checkbox" id="sizewise" name="sizewise" />
+                    <script type="text/javascript">
+                        $('#sizewise').change(function () {
+                            if ($('#sizewise').is(':checked')) {
+                                $('.hideshow').show("slow");
+                            }
+                            else {
+                                $('.hideshow').hide("slow");
+                            }
+                        });
+                        $(document).on("change", ".qty1", function () {
+                            var sum = 0;
+                            //alert('s');
+                            $(".qty1").each(function () {
+                                sum += +$(this).val();
+                            });
+                            $("#OrderQty").val(sum);
+                        });
+                    </script>
+                </div>
+            </div>
+            <div class="hideshow">
+                <div class="row">
+
+                    <div class="col-xs-2">
+                        <label>SIZE LABEL</label>
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.DropDownListFor(model => model.SN1, new List<SelectListItem>
+                 { new SelectListItem{Text="XXS", Value="XXS"},new SelectListItem{Text="XS", Value="XS"},new SelectListItem{Text="S", Value="S"},new SelectListItem{Text="M", Value="M"},new SelectListItem{Text="L", Value="L"},new SelectListItem{Text="XL", Value="XL"},new SelectListItem{Text="XXL", Value="XXL"},new SelectListItem{Text="2XL", Value="2XL"},new SelectListItem{Text="3XL", Value="3XL"},new SelectListItem{Text="4XL", Value="4XL"},new SelectListItem{Text="5XL", Value="5XL"},new SelectListItem{Text="6XL", Value="6XL"},new SelectListItem{Text="1X", Value="1X"},new SelectListItem{Text="2X", Value="2X"},new SelectListItem{Text="3X", Value="3X"},new SelectListItem{Text="4X", Value="4X"},new SelectListItem{Text="LT", Value="LT"},new SelectListItem{Text="XLT", Value="XLT"},new SelectListItem{Text="2XLT", Value="2XLT"},new SelectListItem{Text="3XLT", Value="3XLT"},new SelectListItem{Text="4XLT", Value="4XLT"},
+                     new SelectListItem{Text="5XLT", Value="5XLT"}},
+                "Select Size Label...", new { @class = "ddl" })
+                        @Html.ValidationMessageFor(model => model.SN1)
+                    </div>
+
+                    <div class="col-xs-2">
+                        <label>SIZE</label>  
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.EditorFor(model => model.S1)
+                        @Html.ValidationMessageFor(model => model.S1)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        <label>SIZE LABEL</label>
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.DropDownListFor(model => model.SN2, new List<SelectListItem>
+                 { new SelectListItem{Text="XXS", Value="XXS"},new SelectListItem{Text="XS", Value="XS"},new SelectListItem{Text="S", Value="S"},new SelectListItem{Text="M", Value="M"},new SelectListItem{Text="L", Value="L"},new SelectListItem{Text="XL", Value="XL"},new SelectListItem{Text="XXL", Value="XXL"},new SelectListItem{Text="2XL", Value="2XL"},new SelectListItem{Text="3XL", Value="3XL"},new SelectListItem{Text="4XL", Value="4XL"},new SelectListItem{Text="5XL", Value="5XL"},new SelectListItem{Text="6XL", Value="6XL"},new SelectListItem{Text="1X", Value="1X"},new SelectListItem{Text="2X", Value="2X"},new SelectListItem{Text="3X", Value="3X"},new SelectListItem{Text="4X", Value="4X"},new SelectListItem{Text="LT", Value="LT"},new SelectListItem{Text="XLT", Value="XLT"},new SelectListItem{Text="2XLT", Value="2XLT"},new SelectListItem{Text="3XLT", Value="3XLT"},new SelectListItem{Text="4XLT", Value="4XLT"},
+                     new SelectListItem{Text="5XLT", Value="5XLT"}},
+                "Select Size Label...", new { @class = "ddl" })
+                        @Html.ValidationMessageFor(model => model.SN2)
+                    </div>
+
+                    <div class="col-xs-2">
+                        <label>SIZE</label> 
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.EditorFor(model => model.S2)
+                        @Html.ValidationMessageFor(model => model.S2)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        <label>SIZE LABEL</label>
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.DropDownListFor(model => model.SN3, new List<SelectListItem>
+                 { new SelectListItem{Text="XXS", Value="XXS"},new SelectListItem{Text="XS", Value="XS"},new SelectListItem{Text="S", Value="S"},new SelectListItem{Text="M", Value="M"},new SelectListItem{Text="L", Value="L"},new SelectListItem{Text="XL", Value="XL"},new SelectListItem{Text="XXL", Value="XXL"},new SelectListItem{Text="2XL", Value="2XL"},new SelectListItem{Text="3XL", Value="3XL"},new SelectListItem{Text="4XL", Value="4XL"},new SelectListItem{Text="5XL", Value="5XL"},new SelectListItem{Text="6XL", Value="6XL"},new SelectListItem{Text="1X", Value="1X"},new SelectListItem{Text="2X", Value="2X"},new SelectListItem{Text="3X", Value="3X"},new SelectListItem{Text="4X", Value="4X"},new SelectListItem{Text="LT", Value="LT"},new SelectListItem{Text="XLT", Value="XLT"},new SelectListItem{Text="2XLT", Value="2XLT"},new SelectListItem{Text="3XLT", Value="3XLT"},new SelectListItem{Text="4XLT", Value="4XLT"},
+                     new SelectListItem{Text="5XLT", Value="5XLT"}},
+                "Select Size Label...", new { @class = "ddl" })
+                        @Html.ValidationMessageFor(model => model.SN3)
+                    </div>
+
+                    <div class="col-xs-2">
+                        <label>SIZE</label>  
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.EditorFor(model => model.S3)
+                        @Html.ValidationMessageFor(model => model.S3)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        <label>SIZE LABEL</label>
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.DropDownListFor(model => model.SN4, new List<SelectListItem>
+                 { new SelectListItem{Text="XXS", Value="XXS"},new SelectListItem{Text="XS", Value="XS"},new SelectListItem{Text="S", Value="S"},new SelectListItem{Text="M", Value="M"},new SelectListItem{Text="L", Value="L"},new SelectListItem{Text="XL", Value="XL"},new SelectListItem{Text="XXL", Value="XXL"},new SelectListItem{Text="2XL", Value="2XL"},new SelectListItem{Text="3XL", Value="3XL"},new SelectListItem{Text="4XL", Value="4XL"},new SelectListItem{Text="5XL", Value="5XL"},new SelectListItem{Text="6XL", Value="6XL"},new SelectListItem{Text="1X", Value="1X"},new SelectListItem{Text="2X", Value="2X"},new SelectListItem{Text="3X", Value="3X"},new SelectListItem{Text="4X", Value="4X"},new SelectListItem{Text="LT", Value="LT"},new SelectListItem{Text="XLT", Value="XLT"},new SelectListItem{Text="2XLT", Value="2XLT"},new SelectListItem{Text="3XLT", Value="3XLT"},new SelectListItem{Text="4XLT", Value="4XLT"},
+                     new SelectListItem{Text="5XLT", Value="5XLT"}},
+                "Select Size Label...", new { @class = "ddl" })
+                        @Html.ValidationMessageFor(model => model.SN4)
+                    </div>
+
+                    <div class="col-xs-2">
+                        <label>SIZE</label>  
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.EditorFor(model => model.S4)
+                        @Html.ValidationMessageFor(model => model.S4)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        <label>SIZE LABEL</label>
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.DropDownListFor(model => model.SN5, new List<SelectListItem>
+                 { new SelectListItem{Text="XXS", Value="XXS"},new SelectListItem{Text="XS", Value="XS"},new SelectListItem{Text="S", Value="S"},new SelectListItem{Text="M", Value="M"},new SelectListItem{Text="L", Value="L"},new SelectListItem{Text="XL", Value="XL"},new SelectListItem{Text="XXL", Value="XXL"},new SelectListItem{Text="2XL", Value="2XL"},new SelectListItem{Text="3XL", Value="3XL"},new SelectListItem{Text="4XL", Value="4XL"},new SelectListItem{Text="5XL", Value="5XL"},new SelectListItem{Text="6XL", Value="6XL"},new SelectListItem{Text="1X", Value="1X"},new SelectListItem{Text="2X", Value="2X"},new SelectListItem{Text="3X", Value="3X"},new SelectListItem{Text="4X", Value="4X"},new SelectListItem{Text="LT", Value="LT"},new SelectListItem{Text="XLT", Value="XLT"},new SelectListItem{Text="2XLT", Value="2XLT"},new SelectListItem{Text="3XLT", Value="3XLT"},new SelectListItem{Text="4XLT", Value="4XLT"},
+                     new SelectListItem{Text="5XLT", Value="5XLT"}},
+                "Select Size Label...", new { @class = "ddl" })
+                        @Html.ValidationMessageFor(model => model.SN5)
+                    </div>
+
+                    <div class="col-xs-2">
+                        <label>SIZE</label>  
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.EditorFor(model => model.S5)
+                        @Html.ValidationMessageFor(model => model.S5)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        <label>SIZE LABEL</label>
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.DropDownListFor(model => model.SN6, new List<SelectListItem>
+                 { new SelectListItem{Text="XXS", Value="XXS"},new SelectListItem{Text="XS", Value="XS"},new SelectListItem{Text="S", Value="S"},new SelectListItem{Text="M", Value="M"},new SelectListItem{Text="L", Value="L"},new SelectListItem{Text="XL", Value="XL"},new SelectListItem{Text="XXL", Value="XXL"},new SelectListItem{Text="2XL", Value="2XL"},new SelectListItem{Text="3XL", Value="3XL"},new SelectListItem{Text="4XL", Value="4XL"},new SelectListItem{Text="5XL", Value="5XL"},new SelectListItem{Text="6XL", Value="6XL"},new SelectListItem{Text="1X", Value="1X"},new SelectListItem{Text="2X", Value="2X"},new SelectListItem{Text="3X", Value="3X"},new SelectListItem{Text="4X", Value="4X"},new SelectListItem{Text="LT", Value="LT"},new SelectListItem{Text="XLT", Value="XLT"},new SelectListItem{Text="2XLT", Value="2XLT"},new SelectListItem{Text="3XLT", Value="3XLT"},new SelectListItem{Text="4XLT", Value="4XLT"},
+                     new SelectListItem{Text="5XLT", Value="5XLT"}},
+                "Select Size Label...", new { @class = "ddl" })
+                        @Html.ValidationMessageFor(model => model.SN6)
+                    </div>
+
+                    <div class="col-xs-2">
+                        <label>SIZE</label>  
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.EditorFor(model => model.S6)
+                        @Html.ValidationMessageFor(model => model.S6)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        <label>SIZE LABEL</label>
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.DropDownListFor(model => model.SN7, new List<SelectListItem>
+                 { new SelectListItem{Text="XXS", Value="XXS"},new SelectListItem{Text="XS", Value="XS"},new SelectListItem{Text="S", Value="S"},new SelectListItem{Text="M", Value="M"},new SelectListItem{Text="L", Value="L"},new SelectListItem{Text="XL", Value="XL"},new SelectListItem{Text="XXL", Value="XXL"},new SelectListItem{Text="2XL", Value="2XL"},new SelectListItem{Text="3XL", Value="3XL"},new SelectListItem{Text="4XL", Value="4XL"},new SelectListItem{Text="5XL", Value="5XL"},new SelectListItem{Text="6XL", Value="6XL"},new SelectListItem{Text="1X", Value="1X"},new SelectListItem{Text="2X", Value="2X"},new SelectListItem{Text="3X", Value="3X"},new SelectListItem{Text="4X", Value="4X"},new SelectListItem{Text="LT", Value="LT"},new SelectListItem{Text="XLT", Value="XLT"},new SelectListItem{Text="2XLT", Value="2XLT"},new SelectListItem{Text="3XLT", Value="3XLT"},new SelectListItem{Text="4XLT", Value="4XLT"},
+                     new SelectListItem{Text="5XLT", Value="5XLT"}},
+                "Select Size Label...", new { @class = "ddl" })
+                        @Html.ValidationMessageFor(model => model.SN7)
+                    </div>
+
+                    <div class="col-xs-2">
+                        <label>SIZE</label>  
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.EditorFor(model => model.S7)
+                        @Html.ValidationMessageFor(model => model.S7)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        <label>SIZE LABEL</label>
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.DropDownListFor(model => model.SN8, new List<SelectListItem>
+                 { new SelectListItem{Text="XXS", Value="XXS"},new SelectListItem{Text="XS", Value="XS"},new SelectListItem{Text="S", Value="S"},new SelectListItem{Text="M", Value="M"},new SelectListItem{Text="L", Value="L"},new SelectListItem{Text="XL", Value="XL"},new SelectListItem{Text="XXL", Value="XXL"},new SelectListItem{Text="2XL", Value="2XL"},new SelectListItem{Text="3XL", Value="3XL"},new SelectListItem{Text="4XL", Value="4XL"},new SelectListItem{Text="5XL", Value="5XL"},new SelectListItem{Text="6XL", Value="6XL"},new SelectListItem{Text="1X", Value="1X"},new SelectListItem{Text="2X", Value="2X"},new SelectListItem{Text="3X", Value="3X"},new SelectListItem{Text="4X", Value="4X"},new SelectListItem{Text="LT", Value="LT"},new SelectListItem{Text="XLT", Value="XLT"},new SelectListItem{Text="2XLT", Value="2XLT"},new SelectListItem{Text="3XLT", Value="3XLT"},new SelectListItem{Text="4XLT", Value="4XLT"},
+                     new SelectListItem{Text="5XLT", Value="5XLT"}},
+                "Select Size Label...", new { @class = "ddl" })
+                        @Html.ValidationMessageFor(model => model.SN8)
+                    </div>
+
+                    <div class="col-xs-2">
+                        <label>SIZE</label>  
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.EditorFor(model => model.S8)
+                        @Html.ValidationMessageFor(model => model.S8)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        <label>SIZE LABEL</label>
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.DropDownListFor(model => model.SN9, new List<SelectListItem>
+                 { new SelectListItem{Text="XXS", Value="XXS"},new SelectListItem{Text="XS", Value="XS"},new SelectListItem{Text="S", Value="S"},new SelectListItem{Text="M", Value="M"},new SelectListItem{Text="L", Value="L"},new SelectListItem{Text="XL", Value="XL"},new SelectListItem{Text="XXL", Value="XXL"},new SelectListItem{Text="2XL", Value="2XL"},new SelectListItem{Text="3XL", Value="3XL"},new SelectListItem{Text="4XL", Value="4XL"},new SelectListItem{Text="5XL", Value="5XL"},new SelectListItem{Text="6XL", Value="6XL"},new SelectListItem{Text="1X", Value="1X"},new SelectListItem{Text="2X", Value="2X"},new SelectListItem{Text="3X", Value="3X"},new SelectListItem{Text="4X", Value="4X"},new SelectListItem{Text="LT", Value="LT"},new SelectListItem{Text="XLT", Value="XLT"},new SelectListItem{Text="2XLT", Value="2XLT"},new SelectListItem{Text="3XLT", Value="3XLT"},new SelectListItem{Text="4XLT", Value="4XLT"},
+                     new SelectListItem{Text="5XLT", Value="5XLT"}},
+                "Select Size Label...", new { @class = "ddl" })
+                        @Html.ValidationMessageFor(model => model.SN9)
+                    </div>
+
+                    <div class="col-xs-2">
+                        <label>SIZE</label>  
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.EditorFor(model => model.S9)
+                        @Html.ValidationMessageFor(model => model.S9)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        <label>SIZE LABEL</label>
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.DropDownListFor(model => model.SN10, new List<SelectListItem>
+                 { new SelectListItem{Text="XXS", Value="XXS"},new SelectListItem{Text="XS", Value="XS"},new SelectListItem{Text="S", Value="S"},new SelectListItem{Text="M", Value="M"},new SelectListItem{Text="L", Value="L"},new SelectListItem{Text="XL", Value="XL"},new SelectListItem{Text="XXL", Value="XXL"},new SelectListItem{Text="2XL", Value="2XL"},new SelectListItem{Text="3XL", Value="3XL"},new SelectListItem{Text="4XL", Value="4XL"},new SelectListItem{Text="5XL", Value="5XL"},new SelectListItem{Text="6XL", Value="6XL"},new SelectListItem{Text="1X", Value="1X"},new SelectListItem{Text="2X", Value="2X"},new SelectListItem{Text="3X", Value="3X"},new SelectListItem{Text="4X", Value="4X"},new SelectListItem{Text="LT", Value="LT"},new SelectListItem{Text="XLT", Value="XLT"},new SelectListItem{Text="2XLT", Value="2XLT"},new SelectListItem{Text="3XLT", Value="3XLT"},new SelectListItem{Text="4XLT", Value="4XLT"},
+                     new SelectListItem{Text="5XLT", Value="5XLT"}},
+                "Select Size Label...", new { @class = "ddl" })
+                        @Html.ValidationMessageFor(model => model.SN10)
+                    </div>
+
+                    <div class="col-xs-2">
+                        <label>SIZE</label>  
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.EditorFor(model => model.S10)
+                        @Html.ValidationMessageFor(model => model.S10)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        <label>SIZE LABEL</label>
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.DropDownListFor(model => model.SN11, new List<SelectListItem>
+                 { new SelectListItem{Text="XXS", Value="XXS"},new SelectListItem{Text="XS", Value="XS"},new SelectListItem{Text="S", Value="S"},new SelectListItem{Text="M", Value="M"},new SelectListItem{Text="L", Value="L"},new SelectListItem{Text="XL", Value="XL"},new SelectListItem{Text="XXL", Value="XXL"},new SelectListItem{Text="2XL", Value="2XL"},new SelectListItem{Text="3XL", Value="3XL"},new SelectListItem{Text="4XL", Value="4XL"},new SelectListItem{Text="5XL", Value="5XL"},new SelectListItem{Text="6XL", Value="6XL"},new SelectListItem{Text="1X", Value="1X"},new SelectListItem{Text="2X", Value="2X"},new SelectListItem{Text="3X", Value="3X"},new SelectListItem{Text="4X", Value="4X"},new SelectListItem{Text="LT", Value="LT"},new SelectListItem{Text="XLT", Value="XLT"},new SelectListItem{Text="2XLT", Value="2XLT"},new SelectListItem{Text="3XLT", Value="3XLT"},new SelectListItem{Text="4XLT", Value="4XLT"},
+                     new SelectListItem{Text="5XLT", Value="5XLT"}},
+                "Select Size Label...", new { @class = "ddl" })
+                        @Html.ValidationMessageFor(model => model.SN11)
+                    </div>
+
+                    <div class="col-xs-2">
+                        <label>SIZE</label> 
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.EditorFor(model => model.S11)
+                        @Html.ValidationMessageFor(model => model.S11)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        <label>SIZE LABEL</label>
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.DropDownListFor(model => model.SN12, new List<SelectListItem>
+                 { new SelectListItem{Text="XXS", Value="XXS"},new SelectListItem{Text="XS", Value="XS"},new SelectListItem{Text="S", Value="S"},new SelectListItem{Text="M", Value="M"},new SelectListItem{Text="L", Value="L"},new SelectListItem{Text="XL", Value="XL"},new SelectListItem{Text="XXL", Value="XXL"},new SelectListItem{Text="2XL", Value="2XL"},new SelectListItem{Text="3XL", Value="3XL"},new SelectListItem{Text="4XL", Value="4XL"},new SelectListItem{Text="5XL", Value="5XL"},new SelectListItem{Text="6XL", Value="6XL"},new SelectListItem{Text="1X", Value="1X"},new SelectListItem{Text="2X", Value="2X"},new SelectListItem{Text="3X", Value="3X"},new SelectListItem{Text="4X", Value="4X"},new SelectListItem{Text="LT", Value="LT"},new SelectListItem{Text="XLT", Value="XLT"},new SelectListItem{Text="2XLT", Value="2XLT"},new SelectListItem{Text="3XLT", Value="3XLT"},new SelectListItem{Text="4XLT", Value="4XLT"},
+                     new SelectListItem{Text="5XLT", Value="5XLT"}},
+                "Select Size Label...", new { @class = "ddl" })
+                        @Html.ValidationMessageFor(model => model.SN12)
+                    </div>
+
+                    <div class="col-xs-2">
+                        <label>SIZE</label> 
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.EditorFor(model => model.S12)
+                        @Html.ValidationMessageFor(model => model.S12)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        <label>SIZE LABEL</label>
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.DropDownListFor(model => model.SN13, new List<SelectListItem>
+                 { new SelectListItem{Text="XXS", Value="XXS"},new SelectListItem{Text="XS", Value="XS"},new SelectListItem{Text="S", Value="S"},new SelectListItem{Text="M", Value="M"},new SelectListItem{Text="L", Value="L"},new SelectListItem{Text="XL", Value="XL"},new SelectListItem{Text="XXL", Value="XXL"},new SelectListItem{Text="2XL", Value="2XL"},new SelectListItem{Text="3XL", Value="3XL"},new SelectListItem{Text="4XL", Value="4XL"},new SelectListItem{Text="5XL", Value="5XL"},new SelectListItem{Text="6XL", Value="6XL"},new SelectListItem{Text="1X", Value="1X"},new SelectListItem{Text="2X", Value="2X"},new SelectListItem{Text="3X", Value="3X"},new SelectListItem{Text="4X", Value="4X"},new SelectListItem{Text="LT", Value="LT"},new SelectListItem{Text="XLT", Value="XLT"},new SelectListItem{Text="2XLT", Value="2XLT"},new SelectListItem{Text="3XLT", Value="3XLT"},new SelectListItem{Text="4XLT", Value="4XLT"},
+                     new SelectListItem{Text="5XLT", Value="5XLT"}},
+                "Select Size Label...", new { @class = "ddl" })
+                        @Html.ValidationMessageFor(model => model.SN13)
+                    </div>
+
+                    <div class="col-xs-2">
+                        <label>SIZE</label> 
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.EditorFor(model => model.S13)
+                        @Html.ValidationMessageFor(model => model.S13)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        <label>SIZE LABEL</label>
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.DropDownListFor(model => model.SN14, new List<SelectListItem>
+                 { new SelectListItem{Text="XXS", Value="XXS"},new SelectListItem{Text="XS", Value="XS"},new SelectListItem{Text="S", Value="S"},new SelectListItem{Text="M", Value="M"},new SelectListItem{Text="L", Value="L"},new SelectListItem{Text="XL", Value="XL"},new SelectListItem{Text="XXL", Value="XXL"},new SelectListItem{Text="2XL", Value="2XL"},new SelectListItem{Text="3XL", Value="3XL"},new SelectListItem{Text="4XL", Value="4XL"},new SelectListItem{Text="5XL", Value="5XL"},new SelectListItem{Text="6XL", Value="6XL"},new SelectListItem{Text="1X", Value="1X"},new SelectListItem{Text="2X", Value="2X"},new SelectListItem{Text="3X", Value="3X"},new SelectListItem{Text="4X", Value="4X"},new SelectListItem{Text="LT", Value="LT"},new SelectListItem{Text="XLT", Value="XLT"},new SelectListItem{Text="2XLT", Value="2XLT"},new SelectListItem{Text="3XLT", Value="3XLT"},new SelectListItem{Text="4XLT", Value="4XLT"},
+                     new SelectListItem{Text="5XLT", Value="5XLT"}},
+                "Select Size Label...", new { @class = "ddl" })
+                        @Html.ValidationMessageFor(model => model.SN14)
+                    </div>
+
+                    <div class="col-xs-2">
+                        <label>SIZE</label> 
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.EditorFor(model => model.S14)
+                        @Html.ValidationMessageFor(model => model.S14)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <input type="submit" id="submit" class="btn btn-default" value="Create Purchase Order" />
+                </div>
+            </div>
+        </fieldset>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "PurchaseOrderList", new { }, new { @class = "btn btn-default" })
+    </div>
+</div>

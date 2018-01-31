@@ -1,0 +1,90 @@
+﻿@model IEnumerable<UAL.BLL.Models.ArtWorkUpload>
+
+@{
+    ViewBag.Title = "Profile";
+}
+
+<div id="main1" style="margin-left:195px">
+    <p>
+        @Html.ActionLink("Create New", "DropFiles")
+    </p>
+    <table class="table table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>
+                    Reference
+                </th>
+                <th>
+                    Label
+                </th>
+                <th>
+                    Version
+                </th>
+                <th>
+                    Combo
+                </th>
+                <th>
+                    Item Description
+                </th>
+                <th>
+                    Brand Name
+                </th>
+                <th>
+                    Submission Date
+                </th>
+                <th>
+                    Buyer
+                </th>
+                <th>
+                    Comments
+                </th>
+                <th>
+                    Status
+                </th>
+                @*<th></th>*@
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.refNumber, "sampleDetails", new { refN = item.refNumber }, new { target = "_blank" })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.label)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.version)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.combo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.itemDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.brand)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dateOfSubmission)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.buyer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.comments)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.status)
+                    </td>
+                    @*<td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,107 @@
+﻿@model IEnumerable<UAL.BLL.Models.PurchaseOrder>
+<style>
+    .active {
+        background-color: rgba(0,0,0,0);
+    }
+
+    .tab ul {
+        background-color: #CDD8DA;
+        color:black;
+    }
+
+
+    li a {
+        color: black;
+    }
+
+        li a .active {
+            background-color: #111;
+            color: black;
+        }
+
+        li a:hover:not(.active) {
+            border: 1px solid black;
+            background-color: rgba(110, 210, 242, 0.54);
+        }
+    .nav-tabs > li.active > a,
+    .nav-tabs > li.active > a:hover,
+    .nav-tabs > li.active > a:focus {
+        color: #555555;
+        cursor: default;
+        background-color: rgba(110, 210, 242, 0.54);
+        border: 1px solid #dddddd;
+        border-bottom-color: transparent;
+    } 
+</style>
+
+@{
+    ViewBag.Title = "PurchaseOrderList";
+}
+<div id="main1" style="margin-left:195px;">
+    <h2>Purchase Order List</h2>
+    @Session["POCompleted"] 
+    <p>
+        @Html.ActionLink("Create New", "CreatePurchaseOrder", new { }, new { @class="btn btn-default"})
+    </p>
+    <ul class="nav nav-tabs nav-justified">
+
+        <li style="background-color: #CDD8DA;" class="tab active"><a data-toggle="tab" href="#pendings">Pending</a></li>
+        <li style="background-color: #CDD8DA; " class="tab"><a data-toggle="tab" href="#menu2">Completed</a></li>
+    </ul>
+
+    <div class="tab-content">
+
+        <div id="pendings" class="tab-pane fade in active">
+            <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>
+                            ORD. REF
+                        </th>
+                        
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        if (item.Status == "Pending")
+                        {
+                            <tr>
+                                <td>
+                                    @Html.ActionLink(item.OrderRef, "PurchaseOrder", new { OrdRef = item.OrderRef }, new { @class = "btn btn-default", target = "_blank", @style = "background-color:#CDD8DA;font-weight:bold" })
+                                </td>
+                                
+                                <td>@Html.ActionLink("PO Complete?", "POComplete", new { OrdRef = item.OrderRef }, new { @class = "btn btn-default", @style = "background-color:#CDD8DA;font-weight:bold" })</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div id="menu2" class="tab-pane fade">
+            <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>
+                            ORD. REF
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        if (item.Status == "Completed")
+                        {
+                            <tr>
+                                <td>
+                                   @Html.ActionLink(item.OrderRef, "PurchaseOrder", new { OrdRef = item.OrderRef }, new { @class = "btn btn-default", target = "_blank", @style = "background-color:#CDD8DA;font-weight:bold" })
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

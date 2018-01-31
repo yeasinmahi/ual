@@ -1,0 +1,146 @@
+﻿@model UAL.BLL.DataModel.UserInfo
+
+@{
+    ViewBag.Title = "Login";
+}
+<div id="myCarousel" class="carousel slide" data-ride="carousel" style="float:left; max-width:70%; margin-right: 20px">
+    <!-- Indicators -->
+    <h1 style="text-align:center">Welcome to Union Accessories Limited</h1>
+    <h4 style="text-align:justify; font-family: Calibri">
+        Union Accessories Limited (UAL) is engaged in the business of export oriented garment labels & trims manufacturing industries. Union Accessories Limited started its production in 1999 as a manufacturer and exporter of high quality accessories for 100% export oriented Garments Industries. It produces woven and satin labels, printed labels, woven edge satin ribbons and tags.
+    </h4>
+    <br />
+    @*<ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>*@
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="~/Content/themes/base/images/uspolo.jpg" alt="US Polo">
+            <div class="carousel-caption">
+                <h3 style="background-color:white">US Polo</h3>
+                <p style="color: black; font-weight: 400; font-style: oblique; background-color: white">Union Accessories Limited started its production in 1999 as a manufacturer and exporter of high quality accessories for 100% export oriented Garments Industries.</p>
+            </div>
+        </div>
+
+        <div class="item">
+            <img src="~/Content/themes/base/images/woven.jpg" alt="Woven tag">
+            <div class="carousel-caption">
+                <h3 style="background-color:white">Woven tags</h3>
+                <p style="color: black; font-weight: 400; font-style: oblique; background-color: white">Union Accessories Limited (UAL) is engaged in the business of export oriented garment labels & trims manufacturing industries.</p>
+            </div>
+        </div>
+
+        <div class="item">
+            <img src="~/Content/themes/base/images/jordache.jpg" alt="Jordache">
+            <div class="carousel-caption">
+                <h3 style="background-color:white">Jordache</h3>
+                <p style="color: black; font-weight: 400; font-style: oblique; background-color: white">Union Accessories Limited produces woven and satin labels, printed labels, woven edge satin ribbons and tags.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+<div>
+    @if (Session["PasswordReset"] != null && Session["PasswordReset"].ToString() == "Yes")
+    {
+        <span style="font-size:16px; color:#981c1c; background-color:rgba(255,255,255,1)">A Password Reset Link has been sent to your email address.</span>
+
+    }
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <fieldset id="main1">
+            @*style="margin-left:265px;"*@
+            <legend>Login</legend>
+            @*style="margin-left:8vh; float:right"*@
+            <div>
+                <p style="color:red">
+                    @Html.Raw(TempData["ErrorMessage"])
+                </p>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.userName)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.userName, new { autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(model => model.userName)
+                </div>
+
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Password)
+                </div>
+                <div class="editor-field">
+                    @Html.PasswordFor(model => model.Password, new { autocomplete = "off" })
+                    @Html.ValidationMessageFor(model => model.Password)
+                </div>
+
+                <p>
+                    <input type="submit" value="Log In" class="myLogin" />
+
+                </p>
+            </div>
+        </fieldset>
+    }
+    
+    @using (Html.BeginForm("MailOutput", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div>
+            <a href="#" onclick="showForgotPass()">Forgot Password?</a>
+        </div>
+        <div id="forgotPass" style="display:none">
+            <label>Email:</label>
+            <input id="UserNameF" name="UserNameF" type="email" required />
+            <input type="submit" class="myLogin" id="submitQnA" />
+            
+
+        </div>
+        @*<div id="QnA" style="display:none">
+            <label>Select Question</label>
+            <select>
+                <option>A</option>
+                <option>B</option>
+                <option>C</option>
+            </select>
+            <label>Type Answer</label>
+            <input type="text" id="answer" />
+            <p>
+                <input type="button" onclick="showQuestion()" value="Next" id="nextButton" />
+            </p>
+        </div>*@
+        <script>
+            function showForgotPass() {
+                if (document.getElementById("forgotPass").style.display == "block") {
+                    //alert("yes");
+                    document.getElementById("forgotPass").style.display = "none";
+                    //document.getElementById("QnA").style.display = "none";
+                }
+                else {
+                    //document.getElementById("nextButton").hidden = false;
+                    
+                    document.getElementById("forgotPass").style.display = "block";
+                }
+            }
+            function showQuestion() {
+                document.getElementById("nextButton").hidden = true;
+                document.getElementById("QnA").style.display = "block";
+                document.getElementById("UserNameF").style.maxWidth = "100%";
+            }
+        </script>
+    }
+</div>

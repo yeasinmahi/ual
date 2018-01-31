@@ -1,0 +1,1219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="UnitedAccessoriesDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccessToUsers">
+          <Key>
+            <PropertyRef Name="accessID" />
+          </Key>
+          <Property Name="accessID" Type="int" Nullable="false" />
+          <Property Name="urlID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="hasAccess" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ArtWorkUploads">
+          <Key>
+            <PropertyRef Name="refNumber" />
+          </Key>
+          <Property Name="refNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="label" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="version" Type="varchar" MaxLength="20" />
+          <Property Name="combo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="itemDescription" Type="varchar" MaxLength="100" />
+          <Property Name="brand" Type="varchar" MaxLength="30" />
+          <Property Name="dateOfSubmission" Type="datetime" Nullable="false" />
+          <Property Name="buyer" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="comments" Type="varchar" MaxLength="1000" />
+          <Property Name="status" Type="varchar" MaxLength="50" />
+          <Property Name="createdBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="varchar" MaxLength="50" />
+          <Property Name="Finishing" Type="varchar" MaxLength="50" />
+          <Property Name="isApproved" Type="varchar" MaxLength="50" />
+          <Property Name="ApprovedBy" Type="varchar" MaxLength="50" />
+          <Property Name="NoteAtFooter" Type="varchar" MaxLength="50" />
+          <Property Name="DateOfApproval" Type="datetime" Nullable="false" />
+          <Property Name="SentForApprovalDate" Type="datetime" Nullable="false" />
+          <Property Name="ReceivedFrom" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Breakdowns">
+          <Key>
+            <PropertyRef Name="PONumber" />
+          </Key>
+          <Property Name="PONumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Style1" Type="varchar" MaxLength="50" />
+          <Property Name="Style2" Type="varchar" MaxLength="50" />
+          <Property Name="Style3" Type="varchar" MaxLength="50" />
+          <Property Name="Color" Type="varchar" MaxLength="50" />
+          <Property Name="ReferenceNo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OrderNo" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Indents">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IndentNo" Type="bigint" Nullable="false" />
+          <Property Name="WorkOrder" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ReferenceNo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderRef" />
+          </Key>
+          <Property Name="OrderRef" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OrderRefNo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="CustomerName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DeliveryPlace" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DeliveryDate" Type="datetime" Nullable="false" />
+          <Property Name="TOCompany" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FROMCompany" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Attn" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AccessoryType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OrderQty" Type="bigint" Nullable="false" />
+          <Property Name="Remark" Type="varchar" MaxLength="100" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreationDate" Type="datetime" />
+          <Property Name="ReferenceNo" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymentMethod" Type="varchar" MaxLength="50" />
+          <Property Name="BankAddress" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Swift" Type="varchar" MaxLength="50" />
+          <Property Name="AccountNo" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PurchaseOrders">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PO" Type="varchar" MaxLength="50" />
+          <Property Name="Style" Type="varchar" MaxLength="50" />
+          <Property Name="Ref" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OrderQty" Type="varchar" MaxLength="50" />
+          <Property Name="Remarks" Type="varchar" MaxLength="50" />
+          <Property Name="SN1" Type="varchar" MaxLength="50" />
+          <Property Name="S1" Type="int" />
+          <Property Name="SN2" Type="varchar" MaxLength="50" />
+          <Property Name="S2" Type="int" />
+          <Property Name="SN3" Type="varchar" MaxLength="50" />
+          <Property Name="S3" Type="int" />
+          <Property Name="SN4" Type="varchar" MaxLength="50" />
+          <Property Name="S4" Type="int" />
+          <Property Name="SN5" Type="varchar" MaxLength="50" />
+          <Property Name="S5" Type="int" />
+          <Property Name="SN6" Type="varchar" MaxLength="50" />
+          <Property Name="S6" Type="int" />
+          <Property Name="SN7" Type="varchar" MaxLength="50" />
+          <Property Name="S7" Type="int" />
+          <Property Name="SN8" Type="varchar" MaxLength="50" />
+          <Property Name="S8" Type="int" />
+          <Property Name="SN9" Type="varchar" MaxLength="50" />
+          <Property Name="S9" Type="int" />
+          <Property Name="SN10" Type="varchar" MaxLength="50" />
+          <Property Name="S10" Type="int" />
+          <Property Name="SN11" Type="varchar" MaxLength="50" />
+          <Property Name="S11" Type="int" />
+          <Property Name="SN12" Type="varchar" MaxLength="50" />
+          <Property Name="S12" Type="int" />
+          <Property Name="SN13" Type="varchar" MaxLength="50" />
+          <Property Name="S13" Type="int" />
+          <Property Name="SN14" Type="varchar" MaxLength="50" />
+          <Property Name="S14" Type="int" />
+          <Property Name="IssueDate" Type="datetime" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="ToCompany" Type="varchar" MaxLength="50" />
+          <Property Name="FromCompany" Type="varchar" MaxLength="50" />
+          <Property Name="Attn" Type="varchar" MaxLength="50" />
+          <Property Name="OrderRef" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoleDescription" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="bigint" Nullable="false" />
+          <Property Name="DateModified" Type="datetime" />
+          <Property Name="ModifiedBy" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Sales">
+          <Key>
+            <PropertyRef Name="WO" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="WOIssueDate" Type="datetime" Nullable="false" />
+          <Property Name="WO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustomerName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Buyer" Type="varchar" MaxLength="50" />
+          <Property Name="PO" Type="varchar" MaxLength="100" />
+          <Property Name="CustomerOrderRef" Type="varchar" MaxLength="50" />
+          <Property Name="SL" Type="varchar" MaxLength="50" />
+          <Property Name="UALFileName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LabelType" Type="varchar" MaxLength="50" />
+          <Property Name="LabelName" Type="varchar" MaxLength="50" />
+          <Property Name="Finishing" Type="varchar" MaxLength="50" />
+          <Property Name="Version" Type="varchar" MaxLength="50" />
+          <Property Name="BuyersRef" Type="varchar" MaxLength="50" />
+          <Property Name="OrderQty" Type="varchar" MaxLength="50" />
+          <Property Name="Pick" Type="varchar" MaxLength="50" />
+          <Property Name="Cutter" Type="varchar" MaxLength="50" />
+          <Property Name="Beam" Type="varchar" MaxLength="50" />
+          <Property Name="RatePerDzn" Type="varchar" MaxLength="50" />
+          <Property Name="TotalAmount" Type="varchar" MaxLength="50" />
+          <Property Name="FinishingRate" Type="varchar" MaxLength="50" />
+          <Property Name="FinishingTotalAmount" Type="varchar" MaxLength="50" />
+          <Property Name="GTotalAmount" Type="varchar" MaxLength="50" />
+          <Property Name="AmountReceived" Type="varchar" MaxLength="50" />
+          <Property Name="OrderwiseAmountDue" Type="varchar" MaxLength="50" />
+          <Property Name="Label" Type="varchar" MaxLength="50" />
+          <Property Name="ProductionHours" Type="int" />
+          <Property Name="Priority" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="Combo" Type="varchar" MaxLength="50" />
+          <Property Name="IsSizewise" Type="bit" />
+          <Property Name="WOS" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Sizes">
+          <Key>
+            <PropertyRef Name="OrderRef" />
+          </Key>
+          <Property Name="OrderRef" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="S" Type="bigint" />
+          <Property Name="M" Type="bigint" />
+          <Property Name="L" Type="bigint" />
+          <Property Name="XL" Type="bigint" />
+          <Property Name="XXL" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Urls">
+          <Key>
+            <PropertyRef Name="urlID" />
+          </Key>
+          <Property Name="urlID" Type="int" Nullable="false" />
+          <Property Name="URL" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoleID" Type="bigint" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="UserDetails" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="WOSizes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="sn1" Type="varchar" MaxLength="50" />
+          <Property Name="s1" Type="int" />
+          <Property Name="sn2" Type="varchar" MaxLength="50" />
+          <Property Name="s2" Type="int" />
+          <Property Name="sn3" Type="varchar" MaxLength="50" />
+          <Property Name="s3" Type="int" />
+          <Property Name="sn4" Type="varchar" MaxLength="50" />
+          <Property Name="s4" Type="int" />
+          <Property Name="sn5" Type="varchar" MaxLength="50" />
+          <Property Name="s5" Type="int" />
+          <Property Name="sn6" Type="varchar" MaxLength="50" />
+          <Property Name="s6" Type="int" />
+          <Property Name="sn7" Type="varchar" MaxLength="50" />
+          <Property Name="s7" Type="int" />
+          <Property Name="sn8" Type="varchar" MaxLength="50" />
+          <Property Name="s8" Type="int" />
+          <Property Name="sn9" Type="varchar" MaxLength="50" />
+          <Property Name="s9" Type="int" />
+          <Property Name="sn10" Type="varchar" MaxLength="50" />
+          <Property Name="s10" Type="int" />
+          <Property Name="sn11" Type="varchar" MaxLength="50" />
+          <Property Name="s11" Type="int" />
+          <Property Name="sn12" Type="varchar" MaxLength="50" />
+          <Property Name="s12" Type="int" />
+          <Property Name="sn13" Type="varchar" MaxLength="50" />
+          <Property Name="s13" Type="int" />
+          <Property Name="sn14" Type="varchar" MaxLength="50" />
+          <Property Name="s14" Type="int" />
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AccessToUser_User">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="AccessToUsers" Type="Self.AccessToUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="AccessToUsers">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Breakdown_ArtWorkUploads">
+          <End Role="ArtWorkUploads" Type="Self.ArtWorkUploads" Multiplicity="1" />
+          <End Role="Breakdowns" Type="Self.Breakdowns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArtWorkUploads">
+              <PropertyRef Name="refNumber" />
+            </Principal>
+            <Dependent Role="Breakdowns">
+              <PropertyRef Name="ReferenceNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Breakdown_Order">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="Breakdowns" Type="Self.Breakdowns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderRef" />
+            </Principal>
+            <Dependent Role="Breakdowns">
+              <PropertyRef Name="OrderNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Indent_ArtWorkUploads">
+          <End Role="ArtWorkUploads" Type="Self.ArtWorkUploads" Multiplicity="1" />
+          <End Role="Indents" Type="Self.Indents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArtWorkUploads">
+              <PropertyRef Name="refNumber" />
+            </Principal>
+            <Dependent Role="Indents">
+              <PropertyRef Name="ReferenceNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Indent_Order">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="Indents" Type="Self.Indents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderRef" />
+            </Principal>
+            <Dependent Role="Indents">
+              <PropertyRef Name="WorkOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_ArtWorkUpload">
+          <End Role="ArtWorkUploads" Type="Self.ArtWorkUploads" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArtWorkUploads">
+              <PropertyRef Name="refNumber" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ReferenceNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrder_ArtWorkUploads">
+          <End Role="ArtWorkUploads" Type="Self.ArtWorkUploads" Multiplicity="1" />
+          <End Role="PurchaseOrders" Type="Self.PurchaseOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArtWorkUploads">
+              <PropertyRef Name="refNumber" />
+            </Principal>
+            <Dependent Role="PurchaseOrders">
+              <PropertyRef Name="Ref" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_WOSize">
+          <End Role="WOSizes" Type="Self.WOSizes" Multiplicity="0..1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WOSizes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="WOS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Size_Order">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="Sizes" Type="Self.Sizes" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderRef" />
+            </Principal>
+            <Dependent Role="Sizes">
+              <PropertyRef Name="OrderRef" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_access_tbl_url">
+          <End Role="Urls" Type="Self.Urls" Multiplicity="1" />
+          <End Role="AccessToUsers" Type="Self.AccessToUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urls">
+              <PropertyRef Name="urlID" />
+            </Principal>
+            <Dependent Role="AccessToUsers">
+              <PropertyRef Name="urlID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UnitedAccessoriesDBModelStoreContainer">
+          <EntitySet Name="AccessToUsers" EntityType="Self.AccessToUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ArtWorkUploads" EntityType="Self.ArtWorkUploads" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Breakdowns" EntityType="Self.Breakdowns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Indents" EntityType="Self.Indents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseOrders" EntityType="Self.PurchaseOrders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sales" EntityType="Self.Sales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sizes" EntityType="Self.Sizes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Urls" EntityType="Self.Urls" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WOSizes" EntityType="Self.WOSizes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AccessToUser_User" Association="Self.FK_AccessToUser_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AccessToUsers" EntitySet="AccessToUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Breakdown_ArtWorkUploads" Association="Self.FK_Breakdown_ArtWorkUploads">
+            <End Role="ArtWorkUploads" EntitySet="ArtWorkUploads" />
+            <End Role="Breakdowns" EntitySet="Breakdowns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Breakdown_Order" Association="Self.FK_Breakdown_Order">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Breakdowns" EntitySet="Breakdowns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Indent_ArtWorkUploads" Association="Self.FK_Indent_ArtWorkUploads">
+            <End Role="ArtWorkUploads" EntitySet="ArtWorkUploads" />
+            <End Role="Indents" EntitySet="Indents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Indent_Order" Association="Self.FK_Indent_Order">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Indents" EntitySet="Indents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_ArtWorkUpload" Association="Self.FK_Order_ArtWorkUpload">
+            <End Role="ArtWorkUploads" EntitySet="ArtWorkUploads" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrder_ArtWorkUploads" Association="Self.FK_PurchaseOrder_ArtWorkUploads">
+            <End Role="ArtWorkUploads" EntitySet="ArtWorkUploads" />
+            <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_WOSize" Association="Self.FK_Sales_WOSize">
+            <End Role="WOSizes" EntitySet="WOSizes" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Size_Order" Association="Self.FK_Size_Order">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Sizes" EntitySet="Sizes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_access_tbl_url" Association="Self.FK_tbl_access_tbl_url">
+            <End Role="Urls" EntitySet="Urls" />
+            <End Role="AccessToUsers" EntitySet="AccessToUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Roles" Association="Self.FK_User_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UnitedAccessoriesDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="UnitedAccessoriesDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ArtWorkUploads" EntityType="UnitedAccessoriesDBModel.ArtWorkUpload" />
+          <EntitySet Name="AccessToUsers" EntityType="UnitedAccessoriesDBModel.AccessToUser" />
+          <EntitySet Name="Urls" EntityType="UnitedAccessoriesDBModel.Url" />
+          <AssociationSet Name="FK_tbl_access_tbl_url" Association="UnitedAccessoriesDBModel.FK_tbl_access_tbl_url">
+            <End Role="Url" EntitySet="Urls" />
+            <End Role="AccessToUser" EntitySet="AccessToUsers" />
+          </AssociationSet>
+          <EntitySet Name="Roles" EntityType="UnitedAccessoriesDBModel.Role" />
+          <EntitySet Name="Users" EntityType="UnitedAccessoriesDBModel.User" />
+          <AssociationSet Name="FK_AccessToUser_User" Association="UnitedAccessoriesDBModel.FK_AccessToUser_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="AccessToUser" EntitySet="AccessToUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Roles" Association="UnitedAccessoriesDBModel.FK_User_Roles">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="Orders" EntityType="UnitedAccessoriesDBModel.Order" />
+          <AssociationSet Name="FK_Order_ArtWorkUpload" Association="UnitedAccessoriesDBModel.FK_Order_ArtWorkUpload">
+            <End Role="ArtWorkUpload" EntitySet="ArtWorkUploads" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <EntitySet Name="Sizes" EntityType="UnitedAccessoriesDBModel.Size" />
+          <AssociationSet Name="FK_Size_Order" Association="UnitedAccessoriesDBModel.FK_Size_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="Size" EntitySet="Sizes" />
+          </AssociationSet>
+          <EntitySet Name="Breakdowns" EntityType="UnitedAccessoriesDBModel.Breakdown" />
+          <AssociationSet Name="FK_Breakdown_ArtWorkUploads" Association="UnitedAccessoriesDBModel.FK_Breakdown_ArtWorkUploads">
+            <End Role="ArtWorkUpload" EntitySet="ArtWorkUploads" />
+            <End Role="Breakdown" EntitySet="Breakdowns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Breakdown_Order" Association="UnitedAccessoriesDBModel.FK_Breakdown_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="Breakdown" EntitySet="Breakdowns" />
+          </AssociationSet>
+          <EntitySet Name="Indents" EntityType="UnitedAccessoriesDBModel.Indent" />
+          <AssociationSet Name="FK_Indent_ArtWorkUploads" Association="UnitedAccessoriesDBModel.FK_Indent_ArtWorkUploads">
+            <End Role="ArtWorkUpload" EntitySet="ArtWorkUploads" />
+            <End Role="Indent" EntitySet="Indents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Indent_Order" Association="UnitedAccessoriesDBModel.FK_Indent_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="Indent" EntitySet="Indents" />
+          </AssociationSet>
+          <EntitySet Name="Payments" EntityType="UnitedAccessoriesDBModel.Payment" />
+          <EntitySet Name="Sales" EntityType="UnitedAccessoriesDBModel.Sale" />
+          <EntitySet Name="WOSizes" EntityType="UnitedAccessoriesDBModel.WOSize" />
+          <AssociationSet Name="FK_Sales_WOSize" Association="UnitedAccessoriesDBModel.FK_Sales_WOSize">
+            <End Role="WOSize" EntitySet="WOSizes" />
+            <End Role="Sale" EntitySet="Sales" />
+          </AssociationSet>
+          <EntitySet Name="PurchaseOrders" EntityType="UnitedAccessoriesDBModel.PurchaseOrder" />
+          <AssociationSet Name="FK_PurchaseOrder_ArtWorkUploads" Association="UnitedAccessoriesDBModel.FK_PurchaseOrder_ArtWorkUploads">
+            <End Role="ArtWorkUpload" EntitySet="ArtWorkUploads" />
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="ArtWorkUpload">
+          <Key>
+            <PropertyRef Name="refNumber" />
+          </Key>
+          <Property Type="String" Name="refNumber" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="label" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="version" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="combo" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="itemDescription" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="brand" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="dateOfSubmission" Nullable="false" Precision="3" />
+          <Property Type="String" Name="buyer" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="comments" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="status" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="createdBy" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Price" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Finishing" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="isApproved" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ApprovedBy" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NoteAtFooter" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Orders" Relationship="UnitedAccessoriesDBModel.FK_Order_ArtWorkUpload" FromRole="ArtWorkUpload" ToRole="Order" />
+          <NavigationProperty Name="Breakdowns" Relationship="UnitedAccessoriesDBModel.FK_Breakdown_ArtWorkUploads" FromRole="ArtWorkUpload" ToRole="Breakdown" />
+          <NavigationProperty Name="Indents" Relationship="UnitedAccessoriesDBModel.FK_Indent_ArtWorkUploads" FromRole="ArtWorkUpload" ToRole="Indent" />
+          <Property Name="DateOfApproval" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="SentForApprovalDate" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="ReceivedFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PurchaseOrders" Relationship="UnitedAccessoriesDBModel.FK_PurchaseOrder_ArtWorkUploads" FromRole="ArtWorkUpload" ToRole="PurchaseOrder" />
+        </EntityType>
+        <EntityType Name="AccessToUser">
+          <Key>
+            <PropertyRef Name="accessID" />
+          </Key>
+          <Property Type="Int32" Name="accessID" Nullable="false" />
+          <Property Type="Int32" Name="urlID" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="Boolean" Name="hasAccess" Nullable="false" />
+          <NavigationProperty Name="Url" Relationship="UnitedAccessoriesDBModel.FK_tbl_access_tbl_url" FromRole="AccessToUser" ToRole="Url" />
+          <NavigationProperty Name="User" Relationship="UnitedAccessoriesDBModel.FK_AccessToUser_User" FromRole="AccessToUser" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Url">
+          <Key>
+            <PropertyRef Name="urlID" />
+          </Key>
+          <Property Type="Int32" Name="urlID" Nullable="false" />
+          <Property Type="String" Name="URL" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AccessToUsers" Relationship="UnitedAccessoriesDBModel.FK_tbl_access_tbl_url" FromRole="Url" ToRole="AccessToUser" />
+        </EntityType>
+        <Association Name="FK_tbl_access_tbl_url">
+          <End Type="UnitedAccessoriesDBModel.Url" Role="Url" Multiplicity="1" />
+          <End Type="UnitedAccessoriesDBModel.AccessToUser" Role="AccessToUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Url">
+              <PropertyRef Name="urlID" />
+            </Principal>
+            <Dependent Role="AccessToUser">
+              <PropertyRef Name="urlID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Type="Int64" Name="RoleID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="RoleName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="RoleDescription" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="3" />
+          <Property Type="Int64" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="DateModified" Precision="3" />
+          <Property Type="Int64" Name="ModifiedBy" />
+          <NavigationProperty Name="Users" Relationship="UnitedAccessoriesDBModel.FK_User_Roles" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Type="Int32" Name="UserID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int64" Name="RoleID" Nullable="false" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AccessToUsers" Relationship="UnitedAccessoriesDBModel.FK_AccessToUser_User" FromRole="User" ToRole="AccessToUser" />
+          <NavigationProperty Name="Role" Relationship="UnitedAccessoriesDBModel.FK_User_Roles" FromRole="User" ToRole="Role" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserDetails" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_AccessToUser_User">
+          <End Type="UnitedAccessoriesDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="UnitedAccessoriesDBModel.AccessToUser" Role="AccessToUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="AccessToUser">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Roles">
+          <End Type="UnitedAccessoriesDBModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="UnitedAccessoriesDBModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderRef" />
+          </Key>
+          <Property Name="OrderRef" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderRefNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DeliveryPlace" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DeliveryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TOCompany" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FROMCompany" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Attn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AccessoryType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderQty" Type="Int64" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <Property Name="ReferenceNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ArtWorkUpload" Relationship="UnitedAccessoriesDBModel.FK_Order_ArtWorkUpload" FromRole="Order" ToRole="ArtWorkUpload" />
+          <NavigationProperty Name="Size" Relationship="UnitedAccessoriesDBModel.FK_Size_Order" FromRole="Order" ToRole="Size" />
+          <NavigationProperty Name="Breakdowns" Relationship="UnitedAccessoriesDBModel.FK_Breakdown_Order" FromRole="Order" ToRole="Breakdown" />
+          <NavigationProperty Name="Indents" Relationship="UnitedAccessoriesDBModel.FK_Indent_Order" FromRole="Order" ToRole="Indent" />
+        </EntityType>
+        <Association Name="FK_Order_ArtWorkUpload">
+          <End Type="UnitedAccessoriesDBModel.ArtWorkUpload" Role="ArtWorkUpload" Multiplicity="1" />
+          <End Type="UnitedAccessoriesDBModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArtWorkUpload">
+              <PropertyRef Name="refNumber" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ReferenceNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Size">
+          <Key>
+            <PropertyRef Name="OrderRef" />
+          </Key>
+          <Property Name="OrderRef" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="S" Type="Int64" />
+          <Property Name="M" Type="Int64" />
+          <Property Name="L" Type="Int64" />
+          <Property Name="XL" Type="Int64" />
+          <Property Name="XXL" Type="Int64" />
+          <NavigationProperty Name="Order" Relationship="UnitedAccessoriesDBModel.FK_Size_Order" FromRole="Size" ToRole="Order" />
+        </EntityType>
+        <Association Name="FK_Size_Order">
+          <End Type="UnitedAccessoriesDBModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="UnitedAccessoriesDBModel.Size" Role="Size" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderRef" />
+            </Principal>
+            <Dependent Role="Size">
+              <PropertyRef Name="OrderRef" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Breakdown">
+          <Key>
+            <PropertyRef Name="PONumber" />
+          </Key>
+          <Property Name="PONumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Style1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Style2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Style3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ReferenceNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ArtWorkUpload" Relationship="UnitedAccessoriesDBModel.FK_Breakdown_ArtWorkUploads" FromRole="Breakdown" ToRole="ArtWorkUpload" />
+          <NavigationProperty Name="Order" Relationship="UnitedAccessoriesDBModel.FK_Breakdown_Order" FromRole="Breakdown" ToRole="Order" />
+        </EntityType>
+        <Association Name="FK_Breakdown_ArtWorkUploads">
+          <End Type="UnitedAccessoriesDBModel.ArtWorkUpload" Role="ArtWorkUpload" Multiplicity="1" />
+          <End Type="UnitedAccessoriesDBModel.Breakdown" Role="Breakdown" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArtWorkUpload">
+              <PropertyRef Name="refNumber" />
+            </Principal>
+            <Dependent Role="Breakdown">
+              <PropertyRef Name="ReferenceNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Breakdown_Order">
+          <End Type="UnitedAccessoriesDBModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="UnitedAccessoriesDBModel.Breakdown" Role="Breakdown" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderRef" />
+            </Principal>
+            <Dependent Role="Breakdown">
+              <PropertyRef Name="OrderNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Indent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IndentNo" Type="Int64" Nullable="false" />
+          <Property Name="WorkOrder" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ReferenceNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ArtWorkUpload" Relationship="UnitedAccessoriesDBModel.FK_Indent_ArtWorkUploads" FromRole="Indent" ToRole="ArtWorkUpload" />
+          <NavigationProperty Name="Order" Relationship="UnitedAccessoriesDBModel.FK_Indent_Order" FromRole="Indent" ToRole="Order" />
+        </EntityType>
+        <Association Name="FK_Indent_ArtWorkUploads">
+          <End Type="UnitedAccessoriesDBModel.ArtWorkUpload" Role="ArtWorkUpload" Multiplicity="1" />
+          <End Type="UnitedAccessoriesDBModel.Indent" Role="Indent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArtWorkUpload">
+              <PropertyRef Name="refNumber" />
+            </Principal>
+            <Dependent Role="Indent">
+              <PropertyRef Name="ReferenceNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Indent_Order">
+          <End Type="UnitedAccessoriesDBModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="UnitedAccessoriesDBModel.Indent" Role="Indent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderRef" />
+            </Principal>
+            <Dependent Role="Indent">
+              <PropertyRef Name="WorkOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BankAddress" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Swift" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AccountNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="WO" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="WOIssueDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="WO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Buyer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerOrderRef" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UALFileName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LabelType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LabelName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Finishing" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Version" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BuyersRef" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderQty" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Pick" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cutter" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Beam" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RatePerDzn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TotalAmount" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FinishingRate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FinishingTotalAmount" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GTotalAmount" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AmountReceived" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderwiseAmountDue" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Label" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProductionHours" Type="Int32" />
+          <Property Name="Priority" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Combo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsSizewise" Type="Boolean" />
+          <Property Name="WOS" Type="Int64" />
+          <NavigationProperty Name="WOSize" Relationship="UnitedAccessoriesDBModel.FK_Sales_WOSize" FromRole="Sale" ToRole="WOSize" />
+        </EntityType>
+        <EntityType Name="WOSize">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="sn1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="s1" Type="Int32" />
+          <Property Name="sn2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="s2" Type="Int32" />
+          <Property Name="sn3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="s3" Type="Int32" />
+          <Property Name="sn4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="s4" Type="Int32" />
+          <Property Name="sn5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="s5" Type="Int32" />
+          <Property Name="sn6" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="s6" Type="Int32" />
+          <Property Name="sn7" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="s7" Type="Int32" />
+          <Property Name="sn8" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="s8" Type="Int32" />
+          <Property Name="sn9" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="s9" Type="Int32" />
+          <Property Name="sn10" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="s10" Type="Int32" />
+          <Property Name="sn11" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="s11" Type="Int32" />
+          <Property Name="sn12" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="s12" Type="Int32" />
+          <Property Name="sn13" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="s13" Type="Int32" />
+          <Property Name="sn14" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="s14" Type="Int32" />
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Sales" Relationship="UnitedAccessoriesDBModel.FK_Sales_WOSize" FromRole="WOSize" ToRole="Sale" />
+        </EntityType>
+        <Association Name="FK_Sales_WOSize">
+          <End Type="UnitedAccessoriesDBModel.WOSize" Role="WOSize" Multiplicity="0..1" />
+          <End Type="UnitedAccessoriesDBModel.Sale" Role="Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WOSize">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="WOS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PurchaseOrder">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Style" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ref" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderQty" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SN1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="S1" Type="Int32" />
+          <Property Name="SN2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="S2" Type="Int32" />
+          <Property Name="SN3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="S3" Type="Int32" />
+          <Property Name="SN4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="S4" Type="Int32" />
+          <Property Name="SN5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="S5" Type="Int32" />
+          <Property Name="SN6" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="S6" Type="Int32" />
+          <Property Name="SN7" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="S7" Type="Int32" />
+          <Property Name="SN8" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="S8" Type="Int32" />
+          <Property Name="SN9" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="S9" Type="Int32" />
+          <Property Name="SN10" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="S10" Type="Int32" />
+          <Property Name="SN11" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="S11" Type="Int32" />
+          <Property Name="SN12" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="S12" Type="Int32" />
+          <Property Name="SN13" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="S13" Type="Int32" />
+          <Property Name="SN14" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="S14" Type="Int32" />
+          <NavigationProperty Name="ArtWorkUpload" Relationship="UnitedAccessoriesDBModel.FK_PurchaseOrder_ArtWorkUploads" FromRole="PurchaseOrder" ToRole="ArtWorkUpload" />
+          <Property Name="IssueDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ToCompany" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FromCompany" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Attn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderRef" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_PurchaseOrder_ArtWorkUploads">
+          <End Type="UnitedAccessoriesDBModel.ArtWorkUpload" Role="ArtWorkUpload" Multiplicity="1" />
+          <End Type="UnitedAccessoriesDBModel.PurchaseOrder" Role="PurchaseOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArtWorkUpload">
+              <PropertyRef Name="refNumber" />
+            </Principal>
+            <Dependent Role="PurchaseOrder">
+              <PropertyRef Name="Ref" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="UnitedAccessoriesDBModelStoreContainer" CdmEntityContainer="UnitedAccessoriesDBEntities">
+    <EntitySetMapping Name="ArtWorkUploads">
+      <EntityTypeMapping TypeName="IsTypeOf(UnitedAccessoriesDBModel.ArtWorkUpload)">
+        <MappingFragment StoreEntitySet="ArtWorkUploads">
+          <ScalarProperty Name="refNumber" ColumnName="refNumber" />
+          <ScalarProperty Name="label" ColumnName="label" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="combo" ColumnName="combo" />
+          <ScalarProperty Name="itemDescription" ColumnName="itemDescription" />
+          <ScalarProperty Name="brand" ColumnName="brand" />
+          <ScalarProperty Name="dateOfSubmission" ColumnName="dateOfSubmission" />
+          <ScalarProperty Name="buyer" ColumnName="buyer" />
+          <ScalarProperty Name="comments" ColumnName="comments" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Finishing" ColumnName="Finishing" />
+          <ScalarProperty Name="isApproved" ColumnName="isApproved" />
+          <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+          <ScalarProperty Name="NoteAtFooter" ColumnName="NoteAtFooter" />
+          <ScalarProperty Name="DateOfApproval" ColumnName="DateOfApproval" />
+          <ScalarProperty Name="SentForApprovalDate" ColumnName="SentForApprovalDate" />
+          <ScalarProperty Name="ReceivedFrom" ColumnName="ReceivedFrom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AccessToUsers">
+      <EntityTypeMapping TypeName="IsTypeOf(UnitedAccessoriesDBModel.AccessToUser)">
+        <MappingFragment StoreEntitySet="AccessToUsers">
+          <ScalarProperty Name="accessID" ColumnName="accessID" />
+          <ScalarProperty Name="urlID" ColumnName="urlID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="hasAccess" ColumnName="hasAccess" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Urls">
+      <EntityTypeMapping TypeName="IsTypeOf(UnitedAccessoriesDBModel.Url)">
+        <MappingFragment StoreEntitySet="Urls">
+          <ScalarProperty Name="urlID" ColumnName="urlID" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="IsTypeOf(UnitedAccessoriesDBModel.Role)">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="RoleDescription" ColumnName="RoleDescription" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(UnitedAccessoriesDBModel.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="UserDetails" ColumnName="UserDetails" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="IsTypeOf(UnitedAccessoriesDBModel.Order)">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="OrderRef" ColumnName="OrderRef" />
+          <ScalarProperty Name="OrderRefNo" ColumnName="OrderRefNo" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="DeliveryPlace" ColumnName="DeliveryPlace" />
+          <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+          <ScalarProperty Name="TOCompany" ColumnName="TOCompany" />
+          <ScalarProperty Name="FROMCompany" ColumnName="FROMCompany" />
+          <ScalarProperty Name="Attn" ColumnName="Attn" />
+          <ScalarProperty Name="AccessoryType" ColumnName="AccessoryType" />
+          <ScalarProperty Name="OrderQty" ColumnName="OrderQty" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="ReferenceNo" ColumnName="ReferenceNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sizes">
+      <EntityTypeMapping TypeName="IsTypeOf(UnitedAccessoriesDBModel.Size)">
+        <MappingFragment StoreEntitySet="Sizes">
+          <ScalarProperty Name="OrderRef" ColumnName="OrderRef" />
+          <ScalarProperty Name="S" ColumnName="S" />
+          <ScalarProperty Name="M" ColumnName="M" />
+          <ScalarProperty Name="L" ColumnName="L" />
+          <ScalarProperty Name="XL" ColumnName="XL" />
+          <ScalarProperty Name="XXL" ColumnName="XXL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Breakdowns">
+      <EntityTypeMapping TypeName="IsTypeOf(UnitedAccessoriesDBModel.Breakdown)">
+        <MappingFragment StoreEntitySet="Breakdowns">
+          <ScalarProperty Name="PONumber" ColumnName="PONumber" />
+          <ScalarProperty Name="Style1" ColumnName="Style1" />
+          <ScalarProperty Name="Style2" ColumnName="Style2" />
+          <ScalarProperty Name="Style3" ColumnName="Style3" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="ReferenceNo" ColumnName="ReferenceNo" />
+          <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Indents">
+      <EntityTypeMapping TypeName="IsTypeOf(UnitedAccessoriesDBModel.Indent)">
+        <MappingFragment StoreEntitySet="Indents">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IndentNo" ColumnName="IndentNo" />
+          <ScalarProperty Name="WorkOrder" ColumnName="WorkOrder" />
+          <ScalarProperty Name="ReferenceNo" ColumnName="ReferenceNo" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Payments">
+      <EntityTypeMapping TypeName="IsTypeOf(UnitedAccessoriesDBModel.Payment)">
+        <MappingFragment StoreEntitySet="Payments">
+          <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+          <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+          <ScalarProperty Name="BankAddress" ColumnName="BankAddress" />
+          <ScalarProperty Name="Swift" ColumnName="Swift" />
+          <ScalarProperty Name="AccountNo" ColumnName="AccountNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sales">
+      <EntityTypeMapping TypeName="IsTypeOf(UnitedAccessoriesDBModel.Sale)">
+        <MappingFragment StoreEntitySet="Sales">
+          <ScalarProperty Name="WO" ColumnName="WO" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="WOIssueDate" ColumnName="WOIssueDate" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="Buyer" ColumnName="Buyer" />
+          <ScalarProperty Name="PO" ColumnName="PO" />
+          <ScalarProperty Name="CustomerOrderRef" ColumnName="CustomerOrderRef" />
+          <ScalarProperty Name="SL" ColumnName="SL" />
+          <ScalarProperty Name="UALFileName" ColumnName="UALFileName" />
+          <ScalarProperty Name="LabelType" ColumnName="LabelType" />
+          <ScalarProperty Name="LabelName" ColumnName="LabelName" />
+          <ScalarProperty Name="Finishing" ColumnName="Finishing" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="BuyersRef" ColumnName="BuyersRef" />
+          <ScalarProperty Name="OrderQty" ColumnName="OrderQty" />
+          <ScalarProperty Name="Pick" ColumnName="Pick" />
+          <ScalarProperty Name="Cutter" ColumnName="Cutter" />
+          <ScalarProperty Name="Beam" ColumnName="Beam" />
+          <ScalarProperty Name="RatePerDzn" ColumnName="RatePerDzn" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="FinishingRate" ColumnName="FinishingRate" />
+          <ScalarProperty Name="FinishingTotalAmount" ColumnName="FinishingTotalAmount" />
+          <ScalarProperty Name="GTotalAmount" ColumnName="GTotalAmount" />
+          <ScalarProperty Name="AmountReceived" ColumnName="AmountReceived" />
+          <ScalarProperty Name="OrderwiseAmountDue" ColumnName="OrderwiseAmountDue" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="ProductionHours" ColumnName="ProductionHours" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Combo" ColumnName="Combo" />
+          <ScalarProperty Name="IsSizewise" ColumnName="IsSizewise" />
+          <ScalarProperty Name="WOS" ColumnName="WOS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WOSizes">
+      <EntityTypeMapping TypeName="IsTypeOf(UnitedAccessoriesDBModel.WOSize)">
+        <MappingFragment StoreEntitySet="WOSizes">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="sn1" ColumnName="sn1" />
+          <ScalarProperty Name="s1" ColumnName="s1" />
+          <ScalarProperty Name="sn2" ColumnName="sn2" />
+          <ScalarProperty Name="s2" ColumnName="s2" />
+          <ScalarProperty Name="sn3" ColumnName="sn3" />
+          <ScalarProperty Name="s3" ColumnName="s3" />
+          <ScalarProperty Name="sn4" ColumnName="sn4" />
+          <ScalarProperty Name="s4" ColumnName="s4" />
+          <ScalarProperty Name="sn5" ColumnName="sn5" />
+          <ScalarProperty Name="s5" ColumnName="s5" />
+          <ScalarProperty Name="sn6" ColumnName="sn6" />
+          <ScalarProperty Name="s6" ColumnName="s6" />
+          <ScalarProperty Name="sn7" ColumnName="sn7" />
+          <ScalarProperty Name="s7" ColumnName="s7" />
+          <ScalarProperty Name="sn8" ColumnName="sn8" />
+          <ScalarProperty Name="s8" ColumnName="s8" />
+          <ScalarProperty Name="sn9" ColumnName="sn9" />
+          <ScalarProperty Name="s9" ColumnName="s9" />
+          <ScalarProperty Name="sn10" ColumnName="sn10" />
+          <ScalarProperty Name="s10" ColumnName="s10" />
+          <ScalarProperty Name="sn11" ColumnName="sn11" />
+          <ScalarProperty Name="s11" ColumnName="s11" />
+          <ScalarProperty Name="sn12" ColumnName="sn12" />
+          <ScalarProperty Name="s12" ColumnName="s12" />
+          <ScalarProperty Name="sn13" ColumnName="sn13" />
+          <ScalarProperty Name="s13" ColumnName="s13" />
+          <ScalarProperty Name="sn14" ColumnName="sn14" />
+          <ScalarProperty Name="s14" ColumnName="s14" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PurchaseOrders">
+      <EntityTypeMapping TypeName="IsTypeOf(UnitedAccessoriesDBModel.PurchaseOrder)">
+        <MappingFragment StoreEntitySet="PurchaseOrders">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PO" ColumnName="PO" />
+          <ScalarProperty Name="Style" ColumnName="Style" />
+          <ScalarProperty Name="Ref" ColumnName="Ref" />
+          <ScalarProperty Name="OrderQty" ColumnName="OrderQty" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="SN1" ColumnName="SN1" />
+          <ScalarProperty Name="S1" ColumnName="S1" />
+          <ScalarProperty Name="SN2" ColumnName="SN2" />
+          <ScalarProperty Name="S2" ColumnName="S2" />
+          <ScalarProperty Name="SN3" ColumnName="SN3" />
+          <ScalarProperty Name="S3" ColumnName="S3" />
+          <ScalarProperty Name="SN4" ColumnName="SN4" />
+          <ScalarProperty Name="S4" ColumnName="S4" />
+          <ScalarProperty Name="SN5" ColumnName="SN5" />
+          <ScalarProperty Name="S5" ColumnName="S5" />
+          <ScalarProperty Name="SN6" ColumnName="SN6" />
+          <ScalarProperty Name="S6" ColumnName="S6" />
+          <ScalarProperty Name="SN7" ColumnName="SN7" />
+          <ScalarProperty Name="S7" ColumnName="S7" />
+          <ScalarProperty Name="SN8" ColumnName="SN8" />
+          <ScalarProperty Name="S8" ColumnName="S8" />
+          <ScalarProperty Name="SN9" ColumnName="SN9" />
+          <ScalarProperty Name="S9" ColumnName="S9" />
+          <ScalarProperty Name="SN10" ColumnName="SN10" />
+          <ScalarProperty Name="S10" ColumnName="S10" />
+          <ScalarProperty Name="SN11" ColumnName="SN11" />
+          <ScalarProperty Name="S11" ColumnName="S11" />
+          <ScalarProperty Name="SN12" ColumnName="SN12" />
+          <ScalarProperty Name="S12" ColumnName="S12" />
+          <ScalarProperty Name="SN13" ColumnName="SN13" />
+          <ScalarProperty Name="S13" ColumnName="S13" />
+          <ScalarProperty Name="SN14" ColumnName="SN14" />
+          <ScalarProperty Name="S14" ColumnName="S14" />
+          <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ToCompany" ColumnName="ToCompany" />
+          <ScalarProperty Name="FromCompany" ColumnName="FromCompany" />
+          <ScalarProperty Name="Attn" ColumnName="Attn" />
+          <ScalarProperty Name="OrderRef" ColumnName="OrderRef" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram DiagramId="bc4663435e894777be48e76cbe04e9f9" Name="Diagram1">
+        <EntityTypeShape EntityType="UnitedAccessoriesDBModel.ArtWorkUpload" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnitedAccessoriesDBModel.AccessToUser" Width="1.5" PointX="10.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnitedAccessoriesDBModel.Url" Width="1.5" PointX="8" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnitedAccessoriesDBModel.Role" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnitedAccessoriesDBModel.User" Width="1.5" PointX="8" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnitedAccessoriesDBModel.Order" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnitedAccessoriesDBModel.Size" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnitedAccessoriesDBModel.Breakdown" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnitedAccessoriesDBModel.Indent" Width="1.5" PointX="8.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnitedAccessoriesDBModel.Payment" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnitedAccessoriesDBModel.Sale" Width="1.5" PointX="13" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnitedAccessoriesDBModel.WOSize" Width="1.5" PointX="10.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnitedAccessoriesDBModel.PurchaseOrder" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <AssociationConnector Association="UnitedAccessoriesDBModel.FK_tbl_access_tbl_url" ManuallyRouted="false" />
+        <AssociationConnector Association="UnitedAccessoriesDBModel.FK_AccessToUser_User" ManuallyRouted="false" />
+        <AssociationConnector Association="UnitedAccessoriesDBModel.FK_User_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="UnitedAccessoriesDBModel.FK_Order_ArtWorkUpload" ManuallyRouted="false" />
+        <AssociationConnector Association="UnitedAccessoriesDBModel.FK_Size_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="UnitedAccessoriesDBModel.FK_Breakdown_ArtWorkUploads" ManuallyRouted="false" />
+        <AssociationConnector Association="UnitedAccessoriesDBModel.FK_Breakdown_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="UnitedAccessoriesDBModel.FK_Indent_ArtWorkUploads" ManuallyRouted="false" />
+        <AssociationConnector Association="UnitedAccessoriesDBModel.FK_Indent_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="UnitedAccessoriesDBModel.FK_Sales_WOSize" ManuallyRouted="false" />
+        <AssociationConnector Association="UnitedAccessoriesDBModel.FK_PurchaseOrder_ArtWorkUploads" ManuallyRouted="false" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

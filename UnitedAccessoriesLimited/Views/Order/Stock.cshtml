@@ -1,0 +1,407 @@
+﻿@model UAL.BLL.Models.Sale
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="icon" type="image/x-icon" href="@Url.Content("~/ual.ico")">
+    <meta name="viewport" content="width=device-width" />
+    <title>Stock</title>
+    <style>
+        body {
+            font-family: Calibri;
+            color: #284792;
+            margin: 5%;
+            max-width: 100%;
+            -webkit-print-color-adjust: exact;
+        }
+
+        img {
+            max-width: 80%;
+        }
+
+            img.bottom {
+                vertical-align: text-bottom;
+            }
+
+        div {
+            margin-bottom: 20px;
+        }
+
+        #stockT {
+            width: 100%;
+            margin-bottom: 3%;
+        }
+
+        td {
+            text-align: center;
+            height: 20px;
+            border: 1px solid #284792;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: center;
+            border: 1px solid white;
+            background-color: #284792;
+            color: #fff;
+        }
+    </style>
+    <style type="text/css" media="print">
+        @@page {
+            size: auto; /* auto is the initial value */
+            margin: 0; /* this affects the margin in the printer settings */
+        }
+    </style>
+</head>
+<body>
+    
+    <div>
+        <img class="bottom" src="~/Content/themes/base/images/ual-h.jpg" alt="UAL - Union Accessories Limited" />
+        <table align="right" cellspacing="0" style="height:67px; min-width:80px; font-weight:bold">
+            <tr><td>BEAM</td></tr>
+            <tr><td>@Model.Beam</td></tr>
+        </table>
+    </div>
+    <div>
+        <span style="margin-left: 20%;  margin-bottom: 20px; font-size: 20px;">WORK ORDER # <span style="border-bottom: 2px dotted #284792; display: inline-block; width: 200px; text-align: center" ">@Model.WO</span></span>
+        <span style="float:right; min-width:90px;">
+            <span>DATE : <span style="border-bottom: 2px dotted #284792;">@Model.WOIssueDate.ToString("dd-MM-yyyy")</span> </span>
+            <br />
+            <span>DISK : <span style="border-bottom: 2px dotted #284792;"></span> </span>
+        </span>
+    </div>
+    <div style="min-width:100%">
+        <span>CLIENT / CUSTOMER <span style="border-bottom: 2px dotted #284792; display:inline-block; width: 30%; text-align:center">@Model.CustomerName</span> </span>
+        <span style="float:right">ORDER REF : <span style="border-bottom: 2px dotted #284792; display: inline-block; width: 200px; text-align:center">@Model.WO</span> </span>
+    </div>
+    <table id="stockT" cellspacing="0">
+       
+        <tr>
+            <th>FILE NAME</th>
+            <th>LABEL DESCRIPTION</th>
+            <th>CUT.</th>
+            <th>TTL. PCS.</th>
+            <th>TTL. RPT.</th>
+            <th>PROD. HRS.</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>@Model.BuyersRef</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>COMBO - @Model.Combo</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>@Model.LabelName</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        @{int cnt = 0; long xx = 0;}
+        @if (Model.IsSizewise == false)
+        {
+            <tr>
+                <td>@Model.UALFileName</td>
+                <td>@Model.LabelType</td>
+                <td>@Model.Cutter</td>
+                <td>@Model.OrderQty</td>
+                <td>
+                    @{ int x = (int.Parse(Model.OrderQty) + int.Parse(Model.OrderQty) / 50) / int.Parse(Model.Cutter) + 1; xx += Convert.ToInt64(x);}
+                    @x
+                </td>
+                <td>@Model.ProductionHours</td>
+            </tr>
+        }
+        else 
+        {
+            
+            if (Model.WOSize.sn1 != null)
+            {
+                cnt++;
+                <tr>
+                    <td></td>
+                    <td>@Model.LabelType</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>@Model.UALFileName - @Model.WOSize.sn1</td>
+                    <td>@Model.WOSize.sn1</td>
+                    <td>@Model.Cutter</td>
+                    <td>@Model.WOSize.s1</td>
+                    <td>
+                        @{ int x = ((int)Model.WOSize.s1 + (int)Model.WOSize.s1 / 50) / int.Parse(Model.Cutter) + 1; xx += Convert.ToInt64(x);}
+                        @x
+                    </td>
+                    <td>@Model.ProductionHours</td>
+                </tr>
+            }
+            if (@Model.WOSize.sn2 != null)
+            {
+                cnt++;
+                
+                <tr>
+                    <td>@Model.UALFileName - @Model.WOSize.sn2</td>
+                    <td>@Model.WOSize.sn2</td>
+                    <td>@Model.Cutter</td>
+                    <td>@Model.WOSize.s2</td>
+                    <td>
+                        @{ int x = ((int)Model.WOSize.s2 + (int)Model.WOSize.s2 / 50) / int.Parse(Model.Cutter) + 1; xx += Convert.ToInt64(x);}
+                        @x
+                    </td>
+                    <td></td>
+                </tr>
+            }if (@Model.WOSize.sn3 != null)
+            {
+                cnt++;
+                
+                <tr>
+                    <td>@Model.UALFileName - @Model.WOSize.sn3</td>
+                    <td>@Model.WOSize.sn3</td>
+                    <td>@Model.Cutter</td>
+                    <td>@Model.WOSize.s3</td>
+                    <td>
+                        @{ int x = ((int)Model.WOSize.s3 + (int)Model.WOSize.s3 / 50) / int.Parse(Model.Cutter) + 1; xx += Convert.ToInt64(x);}
+                        @x
+                    </td>
+                    <td></td>
+                </tr>
+            }if (@Model.WOSize.sn4 != null)
+            {
+                cnt++;
+                
+                <tr>
+                    <td>@Model.UALFileName - @Model.WOSize.sn4</td>
+                    <td>@Model.WOSize.sn4</td>
+                    <td>@Model.Cutter</td>
+                    <td>@Model.WOSize.s4</td>
+                    <td>
+                        @{ int x = ((int)Model.WOSize.s4 + (int)Model.WOSize.s4 / 50) / int.Parse(Model.Cutter) + 1; xx += Convert.ToInt64(x);}
+                        @x
+                    </td>
+                    <td></td>
+                </tr>
+            }if (@Model.WOSize.sn5 != null)
+            {
+                cnt++;
+                
+                <tr>
+                    <td>@Model.UALFileName - @Model.WOSize.sn5</td>
+                    <td>@Model.WOSize.sn5</td>
+                    <td>@Model.Cutter</td>
+                    <td>@Model.WOSize.s5</td>
+                    <td>
+                        @{ int x = ((int)Model.WOSize.s5 + (int)Model.WOSize.s5 / 50) / int.Parse(Model.Cutter) + 1; xx += Convert.ToInt64(x);}
+                        @x
+                    </td>
+                    <td></td>
+                </tr>
+            }if (@Model.WOSize.sn6 != null)
+            {
+                cnt++;
+                
+                <tr>
+                    <td>@Model.UALFileName - @Model.WOSize.sn6</td>
+                    <td>@Model.WOSize.sn6</td>
+                    <td>@Model.Cutter</td>
+                    <td>@Model.WOSize.s6</td>
+                    <td>
+                        @{ int x = ((int)Model.WOSize.s6 + (int)Model.WOSize.s6 / 50) / int.Parse(Model.Cutter) + 1; xx += Convert.ToInt64(x);}
+                        @x
+                    </td>
+                    <td></td>
+                </tr>
+            }if (@Model.WOSize.sn7 != null)
+            {
+                cnt++;
+                
+                <tr>
+                    <td>@Model.UALFileName - @Model.WOSize.sn7</td>
+                    <td>@Model.WOSize.sn7</td>
+                    <td>@Model.Cutter</td>
+                    <td>@Model.WOSize.s7</td>
+                    <td>
+                        @{ int x = ((int)Model.WOSize.s7 + (int)Model.WOSize.s7 / 50) / int.Parse(Model.Cutter) + 1; xx += Convert.ToInt64(x);}
+                        @x
+                    </td>
+                    <td></td>
+                </tr>
+            }if (@Model.WOSize.sn8 != null)
+            {
+                cnt++;
+                
+                <tr>
+                    <td>@Model.UALFileName - @Model.WOSize.sn8</td>
+                    <td>@Model.WOSize.sn8</td>
+                    <td>@Model.Cutter</td>
+                    <td>@Model.WOSize.s8</td>
+                    <td>
+                        @{ int x = ((int)Model.WOSize.s8 + (int)Model.WOSize.s8 / 50) / int.Parse(Model.Cutter) + 1; xx += Convert.ToInt64(x);}
+                        @x
+                    </td>
+                    <td></td>
+                </tr>
+            }if (@Model.WOSize.sn9 != null)
+            {
+                cnt++;
+                
+                <tr>
+                    <td>@Model.UALFileName - @Model.WOSize.sn9</td>
+                    <td>@Model.WOSize.sn9</td>
+                    <td>@Model.Cutter</td>
+                    <td>@Model.WOSize.s9</td>
+                    <td>
+                        @{ int x = ((int)Model.WOSize.s9 + (int)Model.WOSize.s9 / 50) / int.Parse(Model.Cutter) + 1; xx += Convert.ToInt64(x);}
+                        @x
+                    </td>
+                    <td></td>
+                </tr>
+            }if (@Model.WOSize.sn10 != null)
+            {
+                cnt++;
+                
+                <tr>
+                    <td>@Model.UALFileName - @Model.WOSize.sn10</td>
+                    <td>@Model.WOSize.sn10</td>
+                    <td>@Model.Cutter</td>
+                    <td>@Model.WOSize.s10</td>
+                    <td>
+                        @{ int x = ((int)Model.WOSize.s10 + (int)Model.WOSize.s10 / 50) / int.Parse(Model.Cutter) + 1; xx += Convert.ToInt64(x);}
+                        @x
+                    </td>
+                    <td></td>
+                </tr>
+            }if (@Model.WOSize.sn11 != null)
+            {
+                cnt++;
+                
+                <tr>
+                    <td>@Model.UALFileName - @Model.WOSize.sn11</td>
+                    <td>@Model.WOSize.sn11</td>
+                    <td>@Model.Cutter</td>
+                    <td>@Model.WOSize.s11</td>
+                    <td>
+                        @{ int x = ((int)Model.WOSize.s11 + (int)Model.WOSize.s11 / 50) / int.Parse(Model.Cutter) + 1; xx += Convert.ToInt64(x);}
+                        @x
+                    </td>
+                    <td></td>
+                </tr>
+            }if (@Model.WOSize.sn12 != null)
+            {
+                cnt++;
+                
+                <tr>
+                    <td>@Model.UALFileName - @Model.WOSize.sn12</td>
+                    <td>@Model.WOSize.sn12</td>
+                    <td>@Model.Cutter</td>
+                    <td>@Model.WOSize.s12</td>
+                    <td>
+                        @{ int x = ((int)Model.WOSize.s12 + (int)Model.WOSize.s12 / 50) / int.Parse(Model.Cutter) + 1; xx += Convert.ToInt64(x);}
+                        @x
+                    </td>
+                    <td></td>
+                </tr>
+            }
+            
+            if (@Model.WOSize.sn13 != null)
+            {
+                cnt++;
+                
+                <tr>
+                    <td>@Model.UALFileName - @Model.WOSize.sn13</td>
+                    <td>@Model.WOSize.sn13</td>
+                    <td>@Model.Cutter</td>
+                    <td>@Model.WOSize.s13</td>
+                    <td>
+                        @{ int x = ((int)Model.WOSize.s13 + (int)Model.WOSize.s13 / 50) / int.Parse(Model.Cutter) + 1; xx += Convert.ToInt64(x);}
+                        @x
+                    </td>
+                    <td></td>
+                </tr>
+            }
+            if (@Model.WOSize.sn14 != null)
+            {
+                cnt++;
+                
+                <tr>
+                    <td>@Model.UALFileName - @Model.WOSize.sn14</td>
+                    <td>@Model.WOSize.sn14</td>
+                    <td>@Model.Cutter</td>
+                    <td>@Model.WOSize.s14</td>
+                    <td>
+                        @{ int x = ((int)Model.WOSize.s14 + (int)Model.WOSize.s14 / 50) / int.Parse(Model.Cutter) + 1; xx += Convert.ToInt64(x);}
+                        @x
+                    </td>
+                    <td></td>
+                </tr>
+            }
+            
+            
+        }
+        @for (int rowCount = 1; rowCount <= 21-cnt; rowCount++)
+        {
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        }
+        <tr>
+            <td></td>
+            <td></td>
+            <td>TOTAL</td>
+            <td>@Model.OrderQty</td>
+            <td>@xx</td>
+            <td>@Model.ProductionHours</td>
+        </tr>
+    </table>
+    <div>
+        <span>RECORD BY: </span>
+        <span style="width:200px; display:inline-block"></span>
+        <span>POSTED BY: </span>
+        <span style="width: 200px; display: inline-block; "></span>
+        <span>CHECKED BY: </span>
+        <span style="width: 200px; display: inline-block"></span>
+    </div>
+    <span>DELIVERY CHALLAN NO. & DATE: </span>
+</body>
+</html>

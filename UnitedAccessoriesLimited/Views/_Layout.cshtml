@@ -1,0 +1,675 @@
+﻿<head>
+    <link rel="icon" type="image/x-icon" href="@Url.Content("~/ual.ico")">
+    <title>@ViewBag.Title</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css">
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+
+
+
+    <link rel="stylesheet"
+          href="@Url.Content("~/Content/Site.css")" />
+    <style>
+        html {
+            background-image: url("../Content/themes/base/images/bg-image.jpg");
+            background-attachment: fixed;
+            min-height: 100%;
+        }
+
+        #topnav {
+            display: none;
+        }
+
+        .linkX {
+            padding: 2px;
+            background-color: #19c;
+            border: 1px solid black;
+            color: white;
+        }
+
+            .linkX:hover {
+                padding: 2px;
+                background-color: white;
+                border: 1px solid black;
+                color: #19c;
+            }
+
+        p {
+            margin-top: 10px;
+        }
+
+        body {
+            font-family: Calibri;
+            transition: background-color .5s;
+            background-color: rgba(250,250,250,0);
+            margin-right: 10px;
+            background-attachment: fixed;
+            margin-bottom: 50px;
+        }
+
+        .carousel-control.left, .carousel-control.right {
+            background-image: none;
+        }
+
+        input, textarea {
+            border: 1px solid darkgray;
+            background: #fff;
+            color: #111;
+            border-radius: 3px;
+            font-size: 1.5em;
+            width: 300px;
+        }
+
+            button,
+            input[type="submit"] {
+                color: white;
+                font-size: 16px;
+            }
+        /*.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+            background-color: #1199cc;
+        }
+        .table-bordered tbody tr:hover td, .table-hover tbody tr:hover th {
+            background-color: #1199cc;
+        }*/
+        #main1 {
+            margin-top: 100px;
+        }
+
+        .ddl {
+            border-radius: 3px;
+            border: 1px solid darkgray;
+            font: 1.5em sans-serif;
+            display: inline-block;
+            margin-right: -4px;
+            min-width: 300px;
+            position: relative;
+            padding: 5px 10px;
+            background: #7ac0da;
+            background-color: #fff;
+            cursor: pointer;
+            -webkit-transition: all 0.2s;
+            -moz-transition: all 0.2s;
+            -ms-transition: all 0.2s;
+            -o-transition: all 0.2s;
+            transition: all 0.2s;
+            text-align: left;
+            list-style: none;
+            -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+            -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+            color: #111;
+        }
+
+            .ddl:hover {
+                background-color: #ddd;
+            }
+
+        .upload {
+            background-color: #b6ff00;
+        }
+
+        .btn-file {
+            position: relative;
+            overflow: hidden;
+        }
+
+            .btn-file input[type=file] {
+                position: absolute;
+                top: 0;
+                right: 0;
+                min-width: 100%;
+                min-height: 100%;
+                font-size: 100px;
+                text-align: right;
+                filter: alpha(opacity=0);
+                opacity: 0;
+                outline: none;
+                background: white;
+                cursor: inherit;
+                display: block;
+            }
+
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: rgba(1,1,1,0.4);
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+            .sidenav a {
+                padding: 8px 8px 8px 15px;
+                text-decoration: none;
+                font-size: 16px;
+                color: #f1f1f1;
+                display: block;
+                transition: 0.3s;
+            }
+
+                .sidenav a:hover, .offcanvas a:focus {
+                    color: #f1f1f1;
+                    background-color: #111;
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                }
+
+            .sidenav .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 29px;
+                margin-left: 50px;
+            }
+
+            .sidenav .menuposition {
+                position: absolute;
+                top: 0;
+                font-size: 29px;
+                margin-left: 0px;
+            }
+
+        #topnav .menuposition img {
+            margin-top: 8px;
+        }
+
+        #main {
+            transition: margin-left .5s;
+            padding: 16px;
+        }
+
+        .modal-content {
+            margin-top: 25%;
+            margin-left: 25%;
+            max-width: 400px;
+            background-color: rgba(222, 222, 222, 0.9);
+        }
+
+        .btn {
+            background-color: rgba(17, 153, 204, 0.6);
+        }
+
+        footer {
+            position: fixed;
+            right: 0;
+            height: 5%;
+            bottom: 0;
+            left: 0;
+            font-family: Calibri;
+            font-size: 14px;
+            padding: 1rem;
+            color: black;
+            background-color: rgba(222, 222, 222, 0.2);
+            text-align: center;
+        }
+
+        .menuClass {
+            background: rgba(0, 0, 0, 0);
+            font-family: sans-serif;
+            font-size: 13px !important;
+            color: white !important;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+            .menuClass:hover {
+                background-color: rgba(45, 52, 57, 0.43) !important;
+                border-bottom-color: #1199cc;
+                color: #ddd !important;
+            }
+
+        .menuActive {
+            border-right: 4px solid #fff !important;
+            background: rgba(17, 153, 204, 0.6) none repeat scroll 0 0 !important;
+            color: #ddd !important;
+        }
+
+        .menuActive1 {
+            border-bottom: 4px solid #fff !important;
+            background: rgba(17, 153, 204, 0.6) none repeat scroll 0 0 !important;
+            color: #ddd !important;
+        }
+
+        .label-as-badge {
+            margin-left: 5px;
+        }
+
+        li a {
+            height: 50px;
+            background-color: rgba(0,0,0,0);
+        }
+
+        ul {
+            background-color: rgba(0,0,0,0);
+        }
+
+        a.closebtn:hover {
+            background-color: rgba(27, 103, 113, 0.00);
+        }
+
+        a.menuposition:hover {
+            background-color: rgba(27, 103, 113, 0.00);
+        }
+
+        body::-webkit-scrollbar {
+            width: 0.7em;
+            height: 0.7em;
+        }
+
+        body::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background-color: rgba(17, 153, 204, 0.6);
+            outline: 1px solid slategrey;
+        }
+
+        .sidenav::-webkit-scrollbar {
+            width: 0.5em;
+        }
+
+        .sidenav::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        }
+
+        .sidenav::-webkit-scrollbar-thumb {
+            background-color: rgba(17, 153, 204, 0.6);
+            outline: 1px solid slategrey;
+        }
+
+        @@media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+                .sidenav a {
+                    font-size: 18px;
+                }
+        }
+
+        th {
+            font-size: 14px;
+        }
+
+        td a {
+            width: 100%;
+        }
+
+        .btn.btn-primary.maroon {
+            background-color: rgba(128,0,0,0.6);
+        }
+
+        .btn.btn-primary.black {
+            background-color: rgba(0,0,0,0.6);
+        }
+
+        .btn.btn-primary.red {
+            background-color: rgba(255,0,0,0.6);
+        }
+
+        .btn.btn-primary.green {
+            background-color: rgba(0,255,0,0.6);
+        }
+
+        .btn.btn-primary.blue {
+            background-color: rgba(0,0,255,0.6);
+        }
+
+        .btn.btn-primary.gray {
+            background-color: rgba(128,128,128,0.6);
+        }
+
+        .btn.btn-primary.default {
+            background-color: rgba(1,1,1,0.4);
+        }
+
+        .btn-group {
+            margin-top: 0px;
+            margin-bottom: 3px;
+        }
+
+        .navbar-right {
+            height: 50px;
+        }
+    </style>
+
+    <script>
+        function setCookie(cname, cvalue) {
+            document.cookie = cname + "=" + cvalue + ";path=/";
+        }
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+
+            var ca = decodedCookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    //alert(c.substring(name.length, c.length));
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+        $(document).ready(function () {
+            var pathname = window.location.pathname;
+            $('[data-toggle="tooltip"]').tooltip({
+                container: 'body'
+            });
+            var menu = getCookie("menu");
+            if (menu != "" && !pathname.includes("/Home/Login")) {
+                if (menu == "top")
+                    changeNav();
+                else openNav();
+            }
+            var col = getCookie("color");
+            if (col != "") {
+                //alert("Color: " + col);
+                $(".sidenav").css("background-color", col);
+                $(".navbar-inverse").css("background-color", col);
+            }
+
+
+            //alert("s");
+            if (pathname.includes("/Home/Login")) {
+                //alert("here");
+                $("#main1").css("margin-top", "0px");
+            }
+            $("#maroon").click(function () {
+                $(".sidenav").css("background-color", "rgba(128,0,0,0.6)");
+                $(".navbar-inverse").css("background-color", "rgba(128,0,0,0.6)");
+                setCookie("color", "rgba(128,0,0,0.6)")
+            });
+            $("#black").click(function () {
+                $(".sidenav").css("background-color", "rgba(0,0,0,0.6)");
+                $(".navbar-inverse").css("background-color", "rgba(0,0,0,0.6)");
+                setCookie("color", "rgba(0,0,0,0.6)")
+            });
+            $("#red").click(function () {
+                $(".sidenav").css("background-color", "rgba(255,0,0,0.6)");
+                $(".navbar-inverse").css("background-color", "rgba(255,0,0,0.6)");
+                setCookie("color", "rgba(255,0,0,0.6)")
+            });
+            $("#blue").click(function () {
+                $(".sidenav").css("background-color", "rgba(0,0,255,0.6)");
+                $(".navbar-inverse").css("background-color", "rgba(0,0,255,0.6)");
+                setCookie("color", "rgba(0,0,255,0.6)")
+            });
+            $("#green").click(function () {
+                $(".sidenav").css("background-color", "rgba(0,128,0,0.6)");
+                $(".navbar-inverse").css("background-color", "rgba(0,128,0,0.6)");
+                setCookie("color", "rgba(0,128,0,0.6)")
+            });
+            $("#gray").click(function () {
+                $(".sidenav").css("background-color", "rgba(128,128,128,0.6)");
+                $(".navbar-inverse").css("background-color", "rgba(128,128,128,0.6)");
+                setCookie("color", "rgba(128,128,128,0.6)")
+            });
+            $("#default").click(function () {
+                $(".sidenav").css("background-color", "rgba(1,1,1,0.4)");
+                $(".navbar-inverse").css("background-color", "rgba(1,1,1,0.4)");
+                setCookie("color", "rgba(1,1,1,0.4)")
+            });
+        });
+    </script>
+</head>
+<body>
+    @if (Session["UserName"] == null && !Request.RawUrl.Contains("Login"))
+    {
+        if (!Request.RawUrl.Contains("PasswordReset"))
+        {
+            Response.Redirect(Url.Action("Login", "Home"));
+        }
+
+    }
+
+    @if (Session["UserName"] != null)
+    {
+        <nav class="navbar navbar-inverse" id="topnav">
+            <div class="container-fluid">
+                <a href="javascript:void(0)" class="menuposition" onclick="openNav()"><img src="~/Content/themes/base/images/left.png" height="30" /></a>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/Home/Dashboard" class="menuClass1" id="home1" data-toggle="tooltip" data-placement="bottom" title="Home"><span style="float: right;"><img src="/Content/themes/base/images/a3.png" alt="Logo" style="width:20px;height:20px;" /></span></a></li>
+                    <li><a href="/Home/About" class="menuClass1" id="about1" data-toggle="tooltip" data-placement="bottom" title="About"><span style="float: right;"><img src="/Content/themes/base/images/a12.png" alt="Logo" style="width:20px;height:20px;" /></span></a></li>
+                    <li><a href="/Home/Contact" class="menuClass1" id="contact1" data-toggle="tooltip" data-placement="bottom" title="Contact us"><span style="float: right;"><img src="/Content/themes/base/images/a10.png" alt="Logo" style="width:20px;height:20px;" /></span></a></li>
+                    @if (Session["UserType"].ToString() == "Admin" || Session["UserType"].ToString() == "General")
+                    {
+                        if (Session["UserType"].ToString() == "Admin")
+                        {
+                            <li><a href="/User/Create" class="menuClass1" id="userMgt1" data-toggle="tooltip" data-placement="bottom" title="User Management"><span style="float: right;"><img src="/Content/themes/base/images/a2.png" alt="Logo" style="width:20px;height:20px;" /></span></a></li>
+
+                        }
+
+                        <li><a href="/Artwork/DropFiles" class="menuClass1" id="dropfiles1" data-toggle="tooltip" data-placement="bottom" title="Upload Art Work"><span style="float: right;"><img src="/Content/themes/base/images/a1.png" alt="Logo" style="width:20px;height:20px;" /></span></a></li>
+                        if (Session["UserType"].ToString() == "Admin")
+                        {
+                            <li><a href="/Artwork/PendingSamples" class="menuClass1" id="pending1" data-toggle="tooltip" data-placement="bottom" title="Pending Samples"><span class="label label-danger label-as-badge" style="float: right;">@Session["TotalPending"]</span></a></li>
+
+                        }
+                    }
+                    @if (Session["UserType"].ToString() == "Admin" || Session["UserType"].ToString() == "Customer")
+                    {
+                        <li><a href="/Artwork/PendingInFactory" class="menuClass1" id="pendingInFactory1" data-toggle="tooltip" data-placement="bottom" title="Pending in Factory"><span class="label label-danger label-as-badge" style="float: right;">@Session["TotalPendingInFactory"]</span></a></li>
+                        <li><a href="/Artwork/ReadyForBuyer" class="menuClass1" id="readyForBuyer1" data-toggle="tooltip" data-placement="bottom" title="Ready for Buyer"><span class="label label-info label-as-badge" style="float: right;">@Session["TotalDeliveredToUAL"]</span></a></li>
+                    }
+                    @if (Session["UserType"].ToString() == "Admin" || Session["UserType"].ToString() == "General")
+                    {
+
+                        <li><a href="/Artwork/Approval" class="menuClass1" id="pendingForApporval1" data-toggle="tooltip" data-placement="bottom" title="Approval Required"><span class="label label-primary label-as-badge" style="float: right;">@Session["TotalSendForApproval"]</span></a></li>
+                        <li>
+                            <a href="/Artwork/ApprovedSamples" class="menuClass1" id="ApprovedSamples1" data-toggle="tooltip" data-placement="bottom" title="Approved Samples"><span class="label label-success label-as-badge" style="float: right;">@Session["TotalApproved"]</span></a>
+                        </li>
+                        <li>
+                            <a href="/Artwork/PriceList" class="menuClass1" id="PriceList1" data-toggle="tooltip" data-placement="bottom" title="Pricelist"><span style="float: right;"><img src="/Content/themes/base/images/a4.png" alt="Logo" style="width:20px;height:20px;" /></span></a>
+                        </li>
+                        <li>
+                            <a href="/Order/WorkOrders" class="menuClass1" id="Order1" data-toggle="tooltip" data-placement="bottom" title="Work Order"><span style="float: right;"><img src="/Content/themes/base/images/a5.png" alt="Logo" style="width:20px;height:20px;" /></span></a>
+                        </li>
+
+
+                        @*<li>
+                                <a href="/Breakdown/BreakDownList" class="menuClass1" id="breakDown1" data-toggle="tooltip" data-placement="bottom" title="Get Breakdown List"><span style="float: right;"><img src="/Content/themes/base/images/a6.png" alt="Logo" style="width:20px;height:20px;" /></span></a>
+                            </li>
+                            <li>
+                                <a href="/FollowUp" class="menuClass1" id="followup1" data-toggle="tooltip" data-placement="bottom" title="Invoice and Follow up"><span style="float: right;"><img src="/Content/themes/base/images/a7.png" alt="Logo" style="width:20px;height:20px;" /></span></a>
+                            </li>*@
+                        <li>
+                            <a href="/Sales" class="menuClass1" id="sales1" data-toggle="tooltip" data-placement="bottom" title="Sales"><span style="float: right;"><img src="/Content/themes/base/images/a9.png" alt="Logo" style="width:20px;height:20px;" /></span></a>
+                        </li>
+                        <li>
+                            <a href="/Order/PurchaseOrderList" class="menuClass1" id="po1" data-toggle="tooltip" data-placement="bottom" title="Purchase Order"><span style="float: right;"><img src="/Content/themes/base/images/a11.png" alt="Logo" style="width:20px;height:20px;" /></span></a>
+                        </li>
+                    }
+
+                </ul>
+            </div>
+        </nav>
+        <div id="mySidenav" class="sidenav">
+            <div>
+                <div>
+                    <a href="javascript:void(0)" class="menuposition" onclick="changeNav()"><img src="~/Content/themes/base/images/top.png" height="30" /></a>
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                </div>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary maroon" id="maroon"></button>
+                <button type="button" class="btn btn-primary black" id="black"></button>
+                <button type="button" class="btn btn-primary red" id="red"></button>
+                <button type="button" class="btn btn-primary blue" id="blue"></button>
+                <button type="button" class="btn btn-primary green" id="green"></button>
+                <button type="button" class="btn btn-primary gray" id="gray"></button>
+                <button type="button" class="btn btn-primary default" id="default"></button>
+            </div>
+            <a href="/Home/Dashboard" class="menuClass" id="home">Home<span style="float: right;"><img src="/Content/themes/base/images/a3.png" alt="Logo" style="width:20px;height:20px;" /></span></a>
+            <a href="/Home/About" class="menuClass" id="about">About<span style="float: right;"><img src="/Content/themes/base/images/a12.png" alt="Logo" style="width:20px;height:20px;" /></span></a>
+            <a href="/Home/Contact" class="menuClass" id="contact">Contact Us<span style="float: right;"><img src="/Content/themes/base/images/a10.png" alt="Logo" style="width:20px;height:20px;" /></span></a>
+            @if (Session["UserType"].ToString() == "Admin" || Session["UserType"].ToString() == "General")
+            {
+                if (Session["UserType"].ToString() == "Admin")
+                {
+                    <a href="/User/Create" class="menuClass" id="userMgt">User Management<span style="float: right;"><img src="/Content/themes/base/images/a2.png" alt="Logo" style="width:20px;height:20px;" /></span></a>
+
+                }
+
+                <a href="/Artwork/DropFiles" class="menuClass" id="dropfiles">Upload Art work<span style="float: right;"><img src="/Content/themes/base/images/a1.png" alt="Logo" style="width:20px;height:20px;" /></span></a>
+                if (Session["UserType"].ToString() == "Admin")
+                {
+                    <a href="/Artwork/PendingSamples" class="menuClass" id="pending">Pending Samples<span class="label label-danger label-as-badge" style="float: right;">@Session["TotalPending"]</span></a>
+
+                }
+            }
+            @if (Session["UserType"].ToString() == "Admin" || Session["UserType"].ToString() == "Customer")
+            {
+                <a href="/Artwork/PendingInFactory" class="menuClass" id="pendingInFactory">Pending In Factory<span class="label label-danger label-as-badge" style="float: right;">@Session["TotalPendingInFactory"]</span></a>
+                <a href="/Artwork/ReadyForBuyer" class="menuClass" id="readyForBuyer">Ready for Buyer<span class="label label-info label-as-badge" style="float: right;">@Session["TotalDeliveredToUAL"]</span></a>
+            }
+            @if (Session["UserType"].ToString() == "Admin" || Session["UserType"].ToString() == "General")
+            {
+
+                <a href="/Artwork/Approval" class="menuClass" id="pendingForApporval">Approval Required<span class="label label-primary label-as-badge" style="float: right;">@Session["TotalSendForApproval"]</span></a>
+                <a href="/Artwork/ApprovedSamples" class="menuClass" id="ApprovedSamples">Approved Samples<span class="label label-success label-as-badge" style="float: right;">@Session["TotalApproved"]</span></a>
+                <a href="/Artwork/PriceList" class="menuClass" id="PriceList">Price List<span style="float: right;"><img src="/Content/themes/base/images/a4.png" alt="Logo" style="width:20px;height:20px;" /></span></a>
+                <a href="/Order/WorkOrders" class="menuClass" id="Order">Work Order<span style="float: right;"><img src="/Content/themes/base/images/a5.png" alt="Logo" style="width:20px;height:20px;" /></span></a>
+
+
+                @*<a href="/Breakdown/BreakDownList" class="menuClass" id="breakDown">Get Breakdown List<span style="float: right;"><img src="/Content/themes/base/images/a6.png" alt="Logo" style="width:20px;height:20px;" /></span></a>
+                    <a href="/FollowUp" class="menuClass" id="followup">Invoice & Follow-up<span style="float: right;"><img src="/Content/themes/base/images/a7.png" alt="Logo" style="width:20px;height:20px;" /></span></a>*@
+                @*<a href="/Packing" class="menuClass" id="packing">Packing Arrangement<span style="float: right;"><img src="/Content/themes/base/images/a8.png" alt="Logo" style="width:20px;height:20px;" /></span></a>*@
+                <a href="/Sales" class="menuClass" id="sales">Sales<span style="float: right;"><img src="/Content/themes/base/images/a9.png" alt="Logo" style="width:20px;height:20px;" /></span></a>
+                <a href="/Order/PurchaseOrderList" class="menuClass" id="po">Purchase Order<span style="float: right;"><img src="/Content/themes/base/images/a11.png" alt="Logo" style="width:20px;height:20px;" /></span></a>
+            }
+        </div>
+        <script>
+            $(document).ready(function () {
+
+                if ($(".table").length) {
+
+                    $('.table').DataTable({
+                        dom: 'Bfrtip',
+                        buttons: [
+                            'copy', 'csv', 'excel', 'pdf', 'print'
+                        ]
+                    });
+
+
+                }
+                var pathname = window.location.pathname;
+                //alert(pathname);
+                switch (pathname) {
+                    case "/Home/Dashboard": { $("#home").addClass('menuActive'); $("#home1").addClass('menuActive1'); break; }
+                    case "/Home/About": { $("#about").addClass('menuActive'); $("#about1").addClass('menuActive1'); break; }
+                    case "/Home/Contact": { $("#contact").addClass('menuActive'); $("#contact1").addClass('menuActive1'); break; }
+                    case "/Artwork/DropFiles": { $("#dropfiles").addClass('menuActive'); $("#dropfiles1").addClass('menuActive1'); break; }
+                    case "/Artwork/PendingSamples": { $("#pending").addClass('menuActive'); $("#pending1").addClass('menuActive1'); break; }
+                    case "/User/Create": { $("#userMgt").addClass('menuActive'); $("#userMgt1").addClass('menuActive1'); break; }
+                    case "/Artwork/PendingInFactory": { $("#pendingInFactory").addClass('menuActive'); $("#pendingInFactory1").addClass('menuActive1'); break; }
+                    case "/Artwork/ReadyForBuyer": { $("#readyForBuyer").addClass('menuActive'); $("#readyForBuyer1").addClass('menuActive1'); break; }
+                    case "/Artwork/Approval": { $("#pendingForApporval").addClass('menuActive'); $("#pendingForApporval1").addClass('menuActive1'); break; }
+                    case "/Artwork/ApprovedSamples": { $("#ApprovedSamples").addClass('menuActive'); $("#ApprovedSamples1").addClass('menuActive1'); break; }
+                    case "/Artwork/PriceList": { $("#PriceList").addClass('menuActive'); $("#PriceList1").addClass('menuActive1'); break; }
+                    case "/Order/WorkOrders": { $("#Order").addClass('menuActive'); $("#Order1").addClass('menuActive1'); break; }
+                    case "/Breakdown/BreakDownList": { $("#breakDown").addClass('menuActive'); $("#breakDown1").addClass('menuActive1'); break; }
+                    case "/FollowUp": { $("#followup").addClass('menuActive'); $("#followup1").addClass('menuActive1'); break; }
+                    case "/Packing": { $("#packing").addClass('menuActive'); $("#packing1").addClass('menuActive1'); break; }
+                    case "/Sales": { $("#sales").addClass('menuActive'); $("#sales1").addClass('menuActive1'); break; }
+                    case "/Order/PurchaseOrderList": { $("#po").addClass('menuActive'); $("#po1").addClass('menuActive1'); break; }
+                }
+            });
+        </script>
+
+        <div id="main">
+
+            <span id="hideshow" style="font-size: 35px; cursor: pointer; display: none;  float: left;  color:#333 " onclick="openNav()">&#9776;</span>
+            <div style="float: right; color:black; ">
+                Logged in as <a href="/Artwork/Profile" class="btn btn-success">@Session["UserName"]</a>
+                <br />
+
+                <a href="#myModal" data-toggle="modal" data-target="#myModal" class="btn btn-danger">Log Out</a>
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+
+                            <div class="modal-body">
+                                <p style="color:#111">Are you sure you want to Log Out?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn" data-dismiss="modal" onclick="location.href='/Home/Logout'">Log Out</button>
+                                <button type="button" class="btn" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                @*<img src="/Content/themes/base/images/logo1.png" alt="Logo" style="float:left;width:40px;height:40px;" />
+                    <span style="font-size:30px;">
+                        Union Accessories Limited
+                    </span>*@
+                <a href="/Home/Contact"><img src="/Content/themes/base/images/ual.png" alt="Logo" style="float:left;width:80%;height:100px;" /></a>
+            </div>
+        </div>
+
+    }
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "180px";
+            document.getElementById("main").style.marginLeft = "180px";
+            document.getElementById("main1").style.marginLeft = "195px";
+            document.getElementById("hideshow").style.display = "none";
+            document.getElementById("topnav").style.display = "none";
+            setCookie("menu", "side");
+            //document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+        }
+        openNav();
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+            document.getElementById("main1").style.marginLeft = "15";
+            document.getElementById("topnav").style.display = "none";
+            document.getElementById("hideshow").style.display = "block";
+
+        }
+        function changeNav() {
+            document.getElementById("main").style.marginLeft = "0";
+            document.getElementById("main1").style.marginLeft = "15";
+            setCookie("menu", "top");
+            document.getElementById("topnav").style.display = "block";
+            document.getElementById("mySidenav").style.width = "0";
+        }
+
+    </script>
+
+</body>
+
+@RenderBody()
+<footer style="text-align:right">&copy;<a href="http://gits-bd.com/">Global Info-Tech Systems </a>2017</footer>

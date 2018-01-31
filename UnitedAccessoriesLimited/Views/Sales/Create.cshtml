@@ -1,0 +1,347 @@
+﻿@model UAL.BLL.Models.Sale
+
+@{
+    ViewBag.Title = "Create";
+}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#issuedate").datepicker({ dateFormat: 'dd-MM-yy' });
+
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        var max_fields = 10; //maximum input boxes allowed
+        var wrapper = $(".dyn"); //Fields wrapper
+        var add_button = $(".add_field_button"); //Add button ID
+
+        var x = 1; //initlal text box count
+        $(add_button).click(function (e) { //on add input button click
+            e.preventDefault();
+            if (x < max_fields) { //max input box allowed
+                x++; //text box increment
+                $("table").append(
+                    '<tr><td><select required name="size[]" class="form-control"><option></option><option>XXS</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option><option>2XL</option><option>3XL</option><option>4XL</option><option>5XL</option><option>6XL</option><option>1X</option><option>2X</option><option>3X</option><option>4X</option><option>LT</option><option>XLT</option><option>2XLT</option><option>3XLT</option><option>4XLT</option><option>5XLT</option></select><td><input type="number" required name="qty[]" class="qty1" min="0" required/><a href="#" class="remove_field">Remove</a></td></tr>'
+                    ); //add input box
+            }
+        });
+
+        $('table').on("click", ".remove_field", function (e) { //user click on remove text
+            //e.preventDefault(); $(this).parent('tr').remove(); x--;
+            $('table tr:last').remove(); x--;
+        })
+    });
+
+</script>
+<div id="main1" style="margin-left:195px;">
+    <h2>UAL</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Work Order</legend>
+            <table>
+                <tr>
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.WOIssueDate)
+                    </td>
+                    <td class="editor-field">
+                        <input type="text" name="issuedate" id="issuedate" required />
+                        @Html.ValidationMessageFor(model => model.WOIssueDate)
+                    </td>
+                    @*<td class="editor-label">
+                            @Html.LabelFor(model => model.WO)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.WO)
+                            @Html.ValidationMessageFor(model => model.WO)
+                        </td>*@
+                </tr>
+                <tr>
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.CustomerName)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.CustomerName)
+                        @Html.ValidationMessageFor(model => model.CustomerName)
+                    </td>
+
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.Buyer)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.Buyer)
+                        @Html.ValidationMessageFor(model => model.Buyer)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.PO)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.PO)
+                        @Html.ValidationMessageFor(model => model.PO)
+                    </td>
+
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.CustomerOrderRef)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.CustomerOrderRef)
+                        @Html.ValidationMessageFor(model => model.CustomerOrderRef)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.SL)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.SL)
+                        @Html.ValidationMessageFor(model => model.SL)
+                    </td>
+
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.UALFileName)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.UALFileName)
+                        @Html.ValidationMessageFor(model => model.UALFileName)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.LabelType)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.LabelType)
+                        @Html.ValidationMessageFor(model => model.LabelType)
+                    </td>
+
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.LabelName)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.LabelName)
+                        @Html.ValidationMessageFor(model => model.LabelName)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.Finishing)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.Finishing)
+                        @Html.ValidationMessageFor(model => model.Finishing)
+                    </td>
+
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.Version)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.Version)
+                        @Html.ValidationMessageFor(model => model.Version)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.BuyersRef)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.BuyersRef)
+                        @Html.ValidationMessageFor(model => model.BuyersRef)
+                    </td>
+
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.OrderQty)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.OrderQty)
+                        @Html.ValidationMessageFor(model => model.OrderQty)
+                    </td>
+                </tr>
+                
+
+                <tr>
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.Pick)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.Pick)
+                        @Html.ValidationMessageFor(model => model.Pick)
+                    </td>
+
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.Cutter)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.Cutter)
+                        @Html.ValidationMessageFor(model => model.Cutter)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.Beam)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.Beam)
+                        @Html.ValidationMessageFor(model => model.Beam)
+                    </td>
+
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.RatePerDzn)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.RatePerDzn)
+                        @Html.ValidationMessageFor(model => model.RatePerDzn)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.TotalAmount)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.TotalAmount)
+                        @Html.ValidationMessageFor(model => model.TotalAmount)
+                    </td>
+
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.FinishingRate)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.FinishingRate)
+                        @Html.ValidationMessageFor(model => model.FinishingRate)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.FinishingTotalAmount)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.FinishingTotalAmount)
+                        @Html.ValidationMessageFor(model => model.FinishingTotalAmount)
+                    </td>
+
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.GTotalAmount)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.GTotalAmount)
+                        @Html.ValidationMessageFor(model => model.GTotalAmount)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.AmountReceived)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.AmountReceived)
+                        @Html.ValidationMessageFor(model => model.AmountReceived)
+                    </td>
+
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.OrderwiseAmountDue)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.OrderwiseAmountDue)
+                        @Html.ValidationMessageFor(model => model.OrderwiseAmountDue)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.Label)
+                    </td>
+                    <td class="editor-field">
+                        <select id="label" name="label" required class="ddl">
+                            <option>WOVEN</option>
+                            <option>NEEDLE</option>
+                            <option>PRINTED</option>
+                            <option>OFFSET</option>
+                            <option>RIBBON</option>
+                        </select>
+                        @Html.ValidationMessageFor(model => model.Label)
+                    </td>
+
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.Priority)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.Priority)
+                        @Html.ValidationMessageFor(model => model.Priority)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        &nbsp;<b>Sizewise: </b><input type="checkbox" id="sizewise" name="sizewise" />
+                        <script type="text/javascript">
+                            $('#sizewise').change(function () {
+                                if ($('#sizewise').is(':checked')) {
+                                    $('.dyn').show("slow");
+                                }
+                                else {
+                                    $('.dyn').hide("slow");
+                                }
+                            });
+                            $(document).on("change", ".qty1", function () {
+                                var sum = 0;
+                                //alert('s');
+                                $(".qty1").each(function () {
+                                    sum += +$(this).val();
+                                });
+                                $("#OrderQty").val(sum);
+                            });
+                        </script>
+                    </td>
+                    </tr>
+                <tr class="dyn" style="display:none">
+                    <td colspan="1">
+                        <select class="form-control" required name="size[]">
+                            <option></option>
+                            <option>XXS</option>
+                            <option>XS</option>
+                            <option>S</option>
+                            <option>M</option>
+                            <option>L</option>
+                            <option>XL</option>
+                            <option>XXL</option>
+                            <option>2XL</option>
+                            <option>3XL</option>
+                            <option>4XL</option>
+                            <option>5XL</option>
+                            <option>6XL</option>
+                            <option>1X</option>
+                            <option>2X</option>
+                            <option>3X</option>
+                            <option>4X</option>
+                            <option>LT</option>
+                            <option>XLT</option>
+                            <option>2XLT</option>
+                            <option>3XLT</option>
+                            <option>4XLT</option>
+                            <option>5XLT</option>
+                        </select>
+                    </td>
+                    <td colspan="1"><input type="number" name="qty[]" class="qty1" min="0" required /></td>
+                    <td><button class="add_field_button">Add More Fields</button></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    
+                </tr>
+            </table>
+            
+                <input type="submit" class="btn btn-default" value="Create" />
+            
+        </fieldset>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-default" })
+    </div>
+</div>

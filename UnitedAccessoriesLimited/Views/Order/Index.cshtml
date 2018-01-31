@@ -1,0 +1,185 @@
+﻿@model UAL.BLL.Models.Order
+
+@{
+    ViewBag.Title = "Index";
+}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#date").datepicker({ dateFormat: 'dd-MM-yy' });
+        $("#deliveryDate").datepicker({ dateFormat: 'dd-MM-yy' });
+    });
+</script>
+<style>
+    
+    input[type="text"] {
+        width: 100%;
+    }
+    input[type="number"] {
+        width: 100%;
+    }
+    
+</style>
+
+<div id="main1" style="margin-left:195px">
+    
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Create Work Order</legend>
+            <table cellspacing="0">
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.OrderRef)
+                    </td>
+                    <td colspan="3">
+                        @Html.EditorFor(model => model.OrderRef)
+                        @Html.ValidationMessageFor(model => model.OrderRef)
+                    </td>
+
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.OrderRefNo)
+                    </td>
+                    <td colspan="3">
+                        @Html.EditorFor(model => model.OrderRefNo)
+                        @Html.ValidationMessageFor(model => model.OrderRefNo)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.Date)
+                    </td>
+                    <td colspan="3">
+                        <input type="text" id="date" name="date" />
+
+                    </td>
+
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.CustomerName)
+                    </td>
+                    <td colspan="3">
+                        @Html.EditorFor(model => model.CustomerName)
+                        @Html.ValidationMessageFor(model => model.CustomerName)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.DeliveryPlace)
+                    </td>
+                    <td colspan="3">
+                        @Html.EditorFor(model => model.DeliveryPlace)
+                        @Html.ValidationMessageFor(model => model.DeliveryPlace)
+                    </td>
+
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.DeliveryDate)
+                    </td>
+                    <td colspan="3">
+                        <input type="text" id="deliveryDate" name="deliveryDate" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.TOCompany)
+                    </td>
+                    <td colspan="3">
+                        @Html.EditorFor(model => model.TOCompany)
+                        @Html.ValidationMessageFor(model => model.TOCompany)
+                    </td>
+
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.FROMCompany)
+                    </td>
+                    <td colspan="3">
+                        @Html.EditorFor(model => model.FROMCompany)
+                        @Html.ValidationMessageFor(model => model.FROMCompany)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.Attn)
+                    </td>
+                    <td colspan="3">
+                        @Html.EditorFor(model => model.Attn)
+                        @Html.ValidationMessageFor(model => model.Attn)
+                    </td>
+
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.AccessoryType)
+                    </td>
+                    <td colspan="3">
+                        @Html.EditorFor(model => model.AccessoryType)
+                        @Html.ValidationMessageFor(model => model.AccessoryType)
+                        &nbsp;<b>Sizewise: </b><input type="checkbox" id="sizewise" name="sizewise" />
+                        <script type="text/javascript">
+                            $('#sizewise').change(function () {
+                                if ($('#sizewise').is(':checked')) {
+                                    $('.dyn').show("slow");
+                                }
+                                else {
+                                    $('.dyn').hide("slow");
+                                }
+                            });
+                            $(document).on("change", ".qty1", function () {
+                                var sum = 0;
+                                $(".qty1").each(function () {
+                                    sum += +$(this).val();
+                                });
+                                $("#OrderQty").val(sum);
+                            });
+                        </script>
+                    </td>
+                    
+                </tr>
+                <tr class="dyn" style="display:none">
+                    <td colspan="1"><b>S</b></td>
+                    <td colspan="1"><input type="number" id="s" name="s" class="qty1" min="0" /></td>
+                    <td colspan="1"><b>M</b></td>
+                    <td colspan="1"><input type="number" id="m" name="m" class="qty1" min="0" /></td>
+                    <td colspan="1"><b>L</b></td>
+                    <td colspan="1"><input type="number" id="l" name="l" class="qty1" min="0" /></td>
+                    <td colspan="1"><b>XL</b></td>
+                    <td colspan="1"><input type="number" id="xl" name="xl" class="qty1" min="0" /></td>
+                    <td colspan="1"><b>XXL</b></td>
+                    <td colspan="1"><input type="number" id="xxl" name="xxl" class="qty1" min="0" /></td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.OrderQty)
+                    </td>
+                    <td colspan="3">
+                        @Html.EditorFor(model => model.OrderQty)
+                        @Html.ValidationMessageFor(model => model.OrderQty)
+                    </td>
+
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.Remark)
+                    </td>
+                    <td colspan="3">
+                        @Html.EditorFor(model => model.Remark)
+                        @Html.ValidationMessageFor(model => model.Remark)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.ReferenceNo)
+                    </td>
+                    <td colspan="3">
+                        @Html.EditorFor(model => model.ReferenceNo)
+                        @Html.ValidationMessageFor(model => model.ReferenceNo)
+                    </td>
+                </tr>
+            </table>
+            <p>
+                <input type="submit" value="Create" />
+            </p>
+        </fieldset>
+    }
+</div>

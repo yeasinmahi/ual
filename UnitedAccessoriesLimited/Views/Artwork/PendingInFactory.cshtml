@@ -1,0 +1,88 @@
+﻿@model IEnumerable<UAL.BLL.Models.ArtWorkUpload>
+
+@{
+    ViewBag.Title = "PendingInFactory";
+}
+<div id="main1" style="margin-left: 195px;">
+    <h2>Pending In Factory</h2>
+    @TempData["deliveredToUAL"]
+    <table class="table table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>
+                    Reference
+                </th>
+                <th>
+                    Label
+                </th>
+                <th>
+                    Version
+                </th>
+                <th>
+                    Combo
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Brand
+                </th>
+                <th>
+                    Submission Date
+                </th>
+                <th>
+                    Buyer
+                </th>
+                <th>
+                    Comments
+                </th>
+                <th>
+                    Creator
+                </th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.refNumber, "sampleDetails", new { refN = item.refNumber }, new { target = "_blank", @class="btn btn-default" })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.label)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.version)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.combo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.itemDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.brand)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dateOfSubmission)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.buyer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.comments)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.createdBy)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Deliver to UAL", "deliveredToUAL", new { refN = item.refNumber }, new { @class = "btn btn-default" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>

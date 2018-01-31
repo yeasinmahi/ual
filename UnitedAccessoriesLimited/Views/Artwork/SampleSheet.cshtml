@@ -1,0 +1,148 @@
+﻿@model UAL.BLL.Models.ArtWorkUpload
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SampleSheet</title>
+    <style>
+        body {
+            font-family: Calibri;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td {
+        }
+
+        #abc td {
+            width: 13px;
+            height: 13px;
+            border: 1px solid #aaa;
+        }
+    </style>
+    <style type="text/css" media="print">
+        @@page {
+            size: auto; /* auto is the initial value */
+            margin: 0; /* this affects the margin in the printer settings */
+        }
+    </style>
+</head>
+<body>
+    <div style="margin-left:5%;">
+
+    </div>
+    <div style="margin-left:6%; margin-top:20%;margin-bottom:5%; margin-right:6%">
+        <table style="border:none; margin-bottom:10px;">
+            <tbody style="font-size:16px;">
+                <tr style="line-height:25px">
+                    <td style="font-weight: bold">DATE</td>
+                    <td colspan="3" >
+                        : <b>@Model.dateOfSubmission.ToString("dd")</b> @Model.dateOfSubmission.ToString("MMMM"), <b>@Model.dateOfSubmission.ToString("yyyy")</b>
+                    </td>
+                    <td style="font-weight: bold">BUYER</td>
+                    <td colspan="3"> : @Html.DisplayFor(model => model.buyer)</td>
+                </tr>
+                <tr style="line-height:25px">
+                    <td style="font-weight: bold">CATEGORY</td>
+                    <td colspan="3"> : @Html.DisplayFor(model => model.itemDescription)</td>
+                    <td style="font-weight: bold">BRAND</td>
+                    <td colspan="3"> : @Html.DisplayFor(model => model.brand)</td>
+                </tr>
+                <tr style="line-height:30px">
+                    <td style="font-weight: bold">REFERENCE</td>
+                    <td colspan="2"> : <span style="font-size:18px; font-weight:bold">@Html.DisplayFor(model => model.refNumber)</span> _Combo <span style="font-size: 18px; font-weight: bold">@Html.DisplayFor(model => model.combo)</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <table cellspacing="0">
+            <thead>
+                <tr style="text-align:center">
+                    <th style="border-top: 1px solid black; border-left: 1px solid black; width: 50%; ">
+                        SUBMISSION
+                    </th>
+                    <th style="border-top: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; width: 50%; ">
+                        PRICE
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="text-align:center">
+                    <td style="border-left: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black; font-weight: bold; ">
+                        @Html.DisplayFor(model => model.comments)
+                    </td>
+                    <td style="border-left: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black; ">
+                        US <b>$ @Html.DisplayFor(model => model.Price)</b> PER DZN. <br />
+                        (@Html.DisplayFor(model => model.Finishing))
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 style="text-decoration:underline">SAMPLE:</h3>
+        <table id="abc" cellspacing="0">
+            @for (int i = 1; i <= 28; i++)
+            {
+                <tr>
+                    @for (int j = 1; j <= 34; j++)
+                    {
+                        <td></td>
+                    }
+                </tr>
+            }
+            @for (int i = 1; i <= 2; i++)
+            {
+                <tr>
+                    @for (int j = 1; j <= 4; j++)
+                    {
+                        <td></td>
+                    }
+                    @if (i == 1)
+                    {
+                        if (Model.NoteAtFooter != null)
+                        {
+                            <td rowspan="2" colspan="26" style="border:1px solid black; text-align:center">
+                                <b>@Html.DisplayFor(model => model.NoteAtFooter)</b>
+                            </td>
+                        }
+                        else
+                        {
+                            for (int j = 1; j <= 26; j++)
+                            {
+                                <td></td>
+                            }
+                        }
+                    }
+                    @if (i == 2 && Model.NoteAtFooter == null)
+                    {
+                        for (int j = 1; j <= 26; j++)
+                            {
+                                <td></td>
+                            }
+                    }
+                    @for (int j = 1; j <= 4; j++)
+                    {
+                        <td></td>
+                    }
+                </tr>
+
+            }
+            @for (int i = 1; i <= 4; i++)
+            {
+                <tr>
+                    @for (int j = 1; j <= 34; j++)
+                    {
+                        <td></td>
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

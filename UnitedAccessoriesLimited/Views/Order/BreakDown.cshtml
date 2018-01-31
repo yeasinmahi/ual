@@ -1,0 +1,238 @@
+﻿@model UAL.BLL.Models.PurchaseOrder
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>BREAKDOWN</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        #center {
+            text-align: center;
+        }
+
+        body {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-wrapper">
+        <div class="row" id="center">
+            <div class="col-md-12">
+                <h4>@Session["FromCompany"]</h4>
+                <u>ADDRESS: House # 00, Sector # 00, PIN CODE: 00000000</u>
+                <br />
+                <h3 style="text-decoration:underline; font-weight:bold">BREAKDOWN SHEET</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <table class="table table-bordered">
+                    <tr><td>SL #</td><td>ITEM</td><td>@Model.ArtWorkUpload.itemDescription</td></tr>
+                    <tr><td>1</td><td>REF #</td><td>@Model.Ref</td></tr>
+                </table>
+            </div>
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-5">
+                <table class="table table-bordered">
+                    <tr><td>ORDER. REF:</td><td>@Model.OrderRef</td></tr>
+                    <tr><td>ISSUE DATE:</td><td>@Model.IssueDate.ToString("dd.MM.yyyy")</td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered">
+                    <tr>
+                        <td>RN #</td>
+                        <td>PO #</td>
+                        <td>Style #</td>
+                        <td>COLOR</td>
+                        <td>Size</td>
+                        <td>TOTAL QTY (Pcs)</td>
+                        <td>Fabrication</td>
+                    </tr>
+                    @if (Model.S1 != null)
+                    {
+                        <tr>
+                            <td></td>
+                            <td>@Model.PO</td>
+                            <td>@Model.Style</td>
+                            <td></td>
+                            <td>@Model.SN1</td>
+                            <td>@Model.S1</td>
+                            <td>@Model.Remarks</td>
+                        </tr>
+                    }
+                    @if (Model.S2 != null)
+                    {
+                        <tr>
+                            <td></td>
+                            <td>@Model.PO</td>
+                            <td>@Model.Style</td>
+                            <td></td>
+                            <td>@Model.SN2</td>
+                            <td>@Model.S2</td>
+                            <td>@Model.Remarks</td>
+                        </tr>
+                    }
+                    @if (Model.S3 != null)
+                    {
+                        <tr>
+                            <td></td>
+                            <td>@Model.PO</td>
+                            <td>@Model.Style</td>
+                            <td></td>
+                            <td>@Model.SN3</td>
+                            <td>@Model.S3</td>
+                            <td>@Model.Remarks</td>
+                        </tr>
+                    }
+                    @if (Model.S4 != null)
+                    {
+                        <tr>
+                            <td></td>
+                            <td>@Model.PO</td>
+                            <td>@Model.Style</td>
+                            <td></td>
+                            <td>@Model.SN4</td>
+                            <td>@Model.S4</td>
+                            <td>@Model.Remarks</td>
+                        </tr>
+                    }
+                    @if (Model.S5 != null)
+                    {
+                        <tr>
+                            <td></td>
+                            <td>@Model.PO</td>
+                            <td>@Model.Style</td>
+                            <td></td>
+                            <td>@Model.SN5</td>
+                            <td>@Model.S5</td>
+                            <td>@Model.Remarks</td>
+                        </tr>
+                    }
+                    @if (Model.S6 != null)
+                    {
+                        <tr>
+                            <td></td>
+                            <td>@Model.PO</td>
+                            <td>@Model.Style</td>
+                            <td></td>
+                            <td>@Model.SN6</td>
+                            <td>@Model.S6</td>
+                            <td>@Model.Remarks</td>
+                        </tr>
+                    }
+                    @if (Model.S7 != null)
+                    {
+                        <tr>
+                            <td></td>
+                            <td>@Model.PO</td>
+                            <td>@Model.Style</td>
+                            <td></td>
+                            <td>@Model.SN7</td>
+                            <td>@Model.S7</td>
+                            <td>@Model.Remarks</td>
+                        </tr>
+                    }
+                    @if (Model.S8 != null)
+                    {
+                        <tr>
+                            <td></td>
+                            <td>@Model.PO</td>
+                            <td>@Model.Style</td>
+                            <td></td>
+                            <td>@Model.SN8</td>
+                            <td>@Model.S8</td>
+                            <td>@Model.Remarks</td>
+                        </tr>
+                    }
+                    @if (Model.S9 != null)
+                    {
+                        <tr>
+                            <td></td>
+                            <td>@Model.PO</td>
+                            <td>@Model.Style</td>
+                            <td></td>
+                            <td>@Model.SN9</td>
+                            <td>@Model.S9</td>
+                            <td>@Model.Remarks</td>
+                        </tr>
+                    }
+                    @if (Model.S10 != null)
+                    {
+                        <tr>
+                            <td></td>
+                            <td>@Model.PO</td>
+                            <td>@Model.Style</td>
+                            <td></td>
+                            <td>@Model.SN10</td>
+                            <td>@Model.SN10</td>
+                            <td>@Model.Remarks</td>
+                        </tr>
+                    }
+                    @if (Model.S11 != null)
+                    {
+                        <tr>
+                            <td></td>
+                            <td>@Model.PO</td>
+                            <td>@Model.Style</td>
+                            <td></td>
+                            <td>@Model.SN11</td>
+                            <td>@Model.SN11</td>
+                            <td>@Model.Remarks</td>
+                        </tr>
+                    }
+                    @if (Model.S12 != null)
+                    {
+                        <tr>
+                            <td></td>
+                            <td>@Model.PO</td>
+                            <td>@Model.Style</td>
+                            <td></td>
+                            <td>@Model.SN12</td>
+                            <td>@Model.SN12</td>
+                            <td>@Model.Remarks</td>
+                        </tr>
+                    }
+                    @if (Model.S13 != null)
+                    {
+                        <tr>
+                            <td></td>
+                            <td>@Model.PO</td>
+                            <td>@Model.Style</td>
+                            <td></td>
+                            <td>@Model.SN13</td>
+                            <td>@Model.SN13</td>
+                            <td>@Model.Remarks</td>
+                        </tr>
+                    }
+                    @if (Model.S14 != null)
+                    {
+                        <tr>
+                            <td></td>
+                            <td>@Model.PO</td>
+                            <td>@Model.Style</td>
+                            <td></td>
+                            <td>@Model.SN14</td>
+                            <td>@Model.SN14</td>
+                            <td>@Model.Remarks</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

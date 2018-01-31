@@ -1,0 +1,118 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+
+<style>
+    #map {
+        height: 400px;
+        width: 100%;
+    }
+    
+    td, th {
+        border-bottom: 1px solid white;
+    }
+
+    table {
+        width: 100%;
+    }
+    h2 {
+        background-color: rgba(17, 153, 204, 0.6);
+        margin-bottom: 10px;
+        color: #fff;
+    }
+    div div:not(.row) {
+        margin-bottom: 10px;
+    }
+    .row {
+        width: 84.3vw;
+        margin-left: 0vw;
+        margin-right: 0vw;
+        background-color: white;
+        color: #333;
+        min-height: 30px;
+        border-bottom: 1px solid #ddd;
+    }
+
+        .row:hover, .col-lg-12:hover {
+            background-color: #eee;
+        }
+</style>
+
+<div id="main1" style="margin-left:195px; color:white">
+    <h2>CONTACT US</h2>
+    <div>
+
+        <div class="row">
+            <div class="col-lg-12">Union Accessories Limited</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                NZ Center, Plot # 5 (4th Floor), Road # 12, Sector # 6, Uttara, Dhaka - 1230.
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                Tel:- 8917638, 8954473, 8917510 FAX:- 80-2-8923994
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                E-mail: info@unionbd.net, shahed@unionbd.com, ahmed@unionbd.net
+            </div>
+        </div>
+
+        @*<h2>
+                Union Accessories Limited
+            </h2>
+            <h4 style="background-color: rgba(0, 0, 0, 0.4); color: white; ">
+                <span style="line-height:30px;">NZ Center, Plot # 5 (4th Floor), Road # 12, Sector # 6, Uttara, Dhaka - 1230.</span><br />
+                <span style="line-height:30px;">Tel:- 8917638, 8954473, 8917510 FAX:- 80-2-8923994</span> <br />
+                <span style="line-height:30px;">E-mail: info@unionbd.net, shahed@unionbd.com, ahmed@unionbd.net</span>
+            </h4>*@
+    </div>
+    <div>
+        <h2>
+            Some Contact Person Detail
+        </h2>
+
+
+
+        <div class="row">
+            <div class="col-lg-4">NAME</div>
+            <div class="col-lg-4">
+                CONTACT NO.
+            </div>
+            <div class="col-lg-4">EMAIL</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">AHMED</div>
+            <div class="col-lg-4">+8801715011786</div>
+            <div class="col-lg-4">ahmed@unionbd.net</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">SAHABUDDIN</div>
+            <div class="col-lg-4">+8801716988883</div>
+            <div class="col-lg-4">sahabuddin@unionbd.net</div>
+        </div>
+
+
+    </div>
+    <div id="map"></div>
+    <script>
+        function initMap() {
+            var uluru = { lat: 23.873378, lng: 90.400947 };
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 18,
+                scrollwheel: false,
+                center: uluru
+            });
+            var marker = new google.maps.Marker({
+                position: uluru,
+                map: map
+            });
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxc87yT1NTZtFONmqatWi9Y2vdmh34KdQ&callback=initMap">
+    </script>
+</div>

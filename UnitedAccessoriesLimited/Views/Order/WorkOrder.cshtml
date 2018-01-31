@@ -1,0 +1,244 @@
+﻿@model UAL.BLL.Models.Order
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>WORK ORDER</title>
+    <style>
+        ol {
+            list-style-type: decimal-leading-zero;
+        }
+
+        body {
+            font-family: Calibri;
+            margin-left: 8%;
+            margin-right: 8%;
+            margin-top: 2%;
+        }
+
+        td {
+            width: 2%;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #sl tr th {
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        #sl tr td {
+            border: 1px solid black;
+            text-align: center;
+        }
+    </style>
+    <style type="text/css" media="print">
+        @@page {
+            size: auto; /* auto is the initial value */
+            margin: 0; /* this affects the margin in the printer settings */
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div style="text-align:center">
+            <h3>
+                Union Accessories Limited
+            </h3>
+            <h5>
+                NZ Center, Plot # 5 (4th Floor), Road # 12, Sector # 6, Uttara, Dhaka - 1230.<br />
+                Tel:- 8917638, 8954473, 8917510 FAX:- 80-2-8923994 <br />
+                E-mail: info@unionbd.net, shahed@unionbd.com, ahmed@unionbd.net
+            </h5>
+        </div>
+        <h3 style="text-decoration:underline; text-align:center">WORK ORDER</h3>
+        <table cellspacing="0" style="margin-left:70%">
+            <tbody>
+                <tr>
+                    <td style="border:1px solid black">
+                        Date:
+                    </td>
+                    <td style="border:1px solid black">
+                        @Model.Date.ToString("dd.MM.yy")
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid black">
+                        Order Ref:
+                    </td>
+                    <td style="border:1px solid black">
+                        @Html.DisplayFor(model => model.OrderRef)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+        <table cellspacing="0">
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td colspan="4"></td>
+                    <td colspan="2" style="border:1px solid black">CUSTOMER NAME: </td>
+                    <td colspan="4" style="border:1px solid black">@Html.DisplayFor(model => model.CustomerName)</td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid black">TO:</td>
+                    <td colspan="4" style="border:1px solid black">@Html.DisplayFor(model => model.TOCompany)</td>
+                    <td colspan="2" style="border:1px solid black">ORDER REF # </td>
+                    <td colspan="4" style="border:1px solid black">@Html.DisplayFor(model => model.OrderRefNo)</td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid black">Attn.</td>
+                    <td colspan="4" style="border:1px solid black">@Html.DisplayFor(model => model.Attn)</td>
+                    <td colspan="2" style="border:1px solid black">Delivery Place: </td>
+                    <td colspan="4" style="border:1px solid black">@Html.DisplayFor(model => model.DeliveryPlace)</td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid black">From</td>
+                    <td colspan="4" style="border:1px solid black">@Html.DisplayFor(model => model.FROMCompany)</td>
+                    <td colspan="2" style="border:1px solid black">Delivery Date: </td>
+                    <td colspan="4" style="border:1px solid black">@Model.DeliveryDate.ToString("dd.MM.yy")</td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+        <table id="sl" cellspacing="0">
+            @if (Session["hasSize"] == null || Session["hasSize"].ToString() == "no")
+            {
+                <tr>
+                    <th>SL No:</th>
+                    <th>ITEM REF:</th>
+                    <th>Brand</th>
+                    <th>Type of Accessories</th>
+                    <th>Order QTY (Pcs).</th>
+                    <th>Remark</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        @Html.DisplayFor(model => model.ReferenceNo)
+                        <br />
+                        (OPTION- @Html.DisplayFor(model => model.ArtWorkUpload.combo))
+                    </td>
+                    <td>@Html.DisplayFor(model => model.ArtWorkUpload.brand)</td>
+                    <td>@Html.DisplayFor(model => model.AccessoryType)</td>
+
+                    <td>@Html.DisplayFor(model => model.OrderQty)</td>
+                    <td>@Html.DisplayFor(model => model.Remark)</td>
+                </tr>
+                <tr style="height:20px">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="3" style="text-align:right">TOTAL:</td>
+                    <td>@Html.DisplayFor(model => model.OrderQty)</td>
+                    <td></td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <th>SL No:</th>
+                    <th>ITEM REF:</th>
+                    <th>Brand</th>
+                    <th>Type of Accessories</th>
+                    <th>Size</th>
+                    <th>Order QTY (Pcs).</th>
+                    <th>Remark</th>
+                </tr>
+                <tr>
+                    <td rowspan="5">1</td>
+                    <td rowspan="5">
+                        @Html.DisplayFor(model => model.ReferenceNo)
+                        <br />
+                        (OPTION- @Html.DisplayFor(model => model.ArtWorkUpload.combo))
+                    </td>
+                    <td rowspan="5">@Html.DisplayFor(model => model.ArtWorkUpload.brand)</td>
+                    <td rowspan="5">@Html.DisplayFor(model => model.AccessoryType)</td>
+
+                    <td>S</td>
+                    <td>@Html.DisplayFor(model => model.Size.S)</td>
+                    
+                    <td rowspan="5">@Html.DisplayFor(model => model.Remark)</td>
+
+                </tr>
+                if (Session["hasSize"].ToString().Equals("yes"))
+                {
+
+                    
+                    <tr>
+                        <td>M</td>
+                        <td>@Html.DisplayFor(model => model.Size.M)</td>
+                    </tr>
+                    <tr>
+                        <td>L</td>
+                        <td>@Html.DisplayFor(model => model.Size.L)</td>
+                    </tr>
+                    <tr>
+                        <td>XL</td>
+                        <td>@Html.DisplayFor(model => model.Size.XL)</td>
+                    </tr>
+                    <tr>
+                        <td>XXL</td>
+                        <td>@Html.DisplayFor(model => model.Size.XXL)</td>
+                    </tr>
+
+
+                }
+
+
+
+
+                <tr style="height:20px">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="4" style="text-align:right">TOTAL:</td>
+                    <td>@Html.DisplayFor(model => model.OrderQty)</td>
+                    <td></td>
+                </tr>
+            }
+        </table>
+        <h4 style="text-decoration:underline">Terms and Conditions</h4>
+        <ol>
+            <li>
+                Accessories quality must be as approved sample which to be ensured by Union Accessories Limited.
+            </li>
+            <li>
+                Delivery quantity must contain 5% extra than above mentioned order quantity.
+            </li>
+            <li>
+                Any color bleeding from hangtag will not be acceptable and the losses will be incurred on your accounts.
+            </li>
+            <li>
+                Model No. and challan No. needs to be mentioned in your bill and model No to be mentioned in each delivery challan.
+            </li>
+            <li>
+                Supplier must be submit original bills with challan to accounts department of U.A.L head Office.
+            </li>
+        </ol>
+        <br />
+        <br />
+        <h4 style="border-top:2px solid black;margin-left:80%; text-align:center">AUTHORISED SIGN</h4>
+    </div>
+</body>
+</html>

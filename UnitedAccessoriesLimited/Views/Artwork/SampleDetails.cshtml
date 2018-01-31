@@ -1,0 +1,230 @@
+﻿@model UAL.BLL.DataModel.detailedSample
+
+@{
+    ViewBag.Title = "SampleDetails";
+}
+<style>
+    .df {
+        font-size: 15px !important;
+        font-weight: bold !important;
+        padding-bottom: 10px !important;
+    }
+
+    .dfl {
+        font-weight: 500 !important;
+        font-size: 15px !important;
+        padding-bottom: 10px !important;
+    }
+
+    #main1 {
+        width: 1000px;
+        height: 500px;
+        position: relative;
+    }
+
+    .float {
+        height: 500px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .left {
+        position: fixed;
+        width: 500px;
+    }
+
+    .right {
+        max-height: 400px;
+        background-color:white;
+        float: right;
+        max-width: 400px;
+    }
+    .col-lg-6{
+        margin-bottom:30px;
+    }
+</style>
+<div class="row" id="main1" style="margin-left:195px;">
+    <div class="col-lg-6">
+        @Html.ActionLink("Sample Sheet", "SampleSheet", "Artwork", new { refN = Model.Reference }, new { @class = "btn btn-default", target = "_blank" })
+        @Html.ActionLink("Edit", "Edit", "Artwork", new { refN = Model.Reference }, new { @class = "btn btn-default", target = "_blank" })
+        @Html.ActionLink("View Sample", "viewSample", new { label = Model.Label, refN = Model.Reference, combo = Model.Combo, buyer = Model.Buyer, doS = Model.dateOfSubmission }, new { @class = "btn btn-default", target = "_blank" })
+        <table cellpadding="0">
+            <tr>
+
+                <td class="dfl">
+                    @Html.DisplayNameFor(model => model.Buyer)
+                </td>
+
+                <td class="df">
+                    @Html.DisplayFor(model => model.Buyer)
+                </td>
+            </tr>
+            <tr>
+                <td class="dfl">
+                    @Html.DisplayNameFor(model => model.Brand)
+                </td>
+                <td class="df">
+                    @Html.DisplayFor(model => model.Brand)
+                </td>
+            </tr>
+            <tr>
+
+                <td class="dfl">
+                    @Html.DisplayNameFor(model => model.Label)
+                </td>
+                <td class="df">
+                    @Html.DisplayFor(model => model.Label)
+                </td>
+            </tr>
+            <tr>
+                <td class="dfl">
+                    @Html.DisplayNameFor(model => model.Description)
+                </td>
+                <td class="df">
+                    @Html.DisplayFor(model => model.Description)
+                </td>
+
+            </tr>
+            <tr>
+                <td class="dfl">
+                    @Html.DisplayNameFor(model => model.Reference)
+                </td>
+                <td class="df">
+                    @Html.DisplayFor(model => model.Reference)
+                </td>
+            </tr>
+            
+            <tr>
+                <td class="dfl">
+                    @Html.DisplayNameFor(model => model.Combo)
+                </td>
+                <td class="df">
+                    @Html.DisplayFor(model => model.Combo)
+                </td>
+            </tr>
+            <tr>
+                <td class="dfl">
+                    @Html.DisplayNameFor(model => model.Finishing)
+                </td>
+                <td class="df">
+                    @Html.DisplayFor(model => model.Finishing)
+                </td>
+            </tr>
+            <tr>
+                <td class="dfl">
+                    @Html.DisplayNameFor(model => model.Price)
+                </td>
+                <td class="df">
+                    @Html.DisplayFor(model => model.Price)
+                </td>
+            </tr>
+            <tr>
+                <td class="dfl">
+                    @Html.DisplayNameFor(model => model.version)
+                </td>
+                <td class="df">
+                    @Html.DisplayFor(model => model.version)
+                </td>
+            </tr>
+            <tr>
+
+                <td class="dfl">
+                    @Html.DisplayNameFor(model => model.NoteAtFooter)
+                </td>
+                <td class="df">
+                    @Html.DisplayFor(model => model.NoteAtFooter)
+                </td>
+            </tr>
+            
+            <tr>
+                <td class="dfl">
+                    Receiving Date
+                </td>
+                <td class="df">
+                    @Html.DisplayFor(model => model.dateOfSubmission)
+                </td>
+            </tr>
+            <tr>
+                <td class="dfl">
+                    Sent For Approval Date
+                </td>
+                <td class="df">
+                    @Html.DisplayFor(model => model.sentForApprovalDate)
+                </td>
+            </tr>
+            <tr>
+                <td class="dfl">
+                    Approval Date
+                </td>
+                <td class="df">
+                    @Html.DisplayFor(model => model.dateOfApproval)
+                </td>
+            </tr>
+            <tr>
+                <td class="dfl">
+                    Received From
+                </td>
+                <td class="df">
+                    @Html.DisplayFor(model => model.ReceivedFrom)
+                </td>
+            </tr>
+            <tr>
+                <td class="dfl">
+                    @Html.DisplayNameFor(model => model.comments)
+                </td>
+                <td class="df">
+                    @Html.DisplayFor(model => model.comments)
+                </td>
+            </tr>
+            
+        </table>
+        @using (Html.BeginForm("UploadImageForSample", "Artwork", new { label = Model.Label, refN = Model.Reference, combo = Model.Combo, buyer = Model.Buyer, doS = Model.dateOfSubmission }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" name="file" accept="image/jpeg,image/x-png" class="file" onchange=" getfilename()" required />
+                    <input type="submit" name="Submit" id="Submit" class="" value="Submit Sample" onclick="disableSubmit()" />
+}
+        <script>
+            function getFileName() {
+                var fileN = $('input[type=file]').val();
+                fileN = fileN.slice(12);
+                document.getElementById("fileName").innerHTML = fileN;
+            }
+            function disableSubmit() {
+                document.getElementById("Submit").hidden = true;
+            }
+            
+        </script>
+
+    </div>
+    <div class="float right">
+        <input type="button" style="background-color:white" onclick="white()" value="White Background"/>
+        
+        <input type="button" style="background-color:gray; color:white" onclick="gray()" value="Gray Background" />
+        <input type="button" style="background-color:black; color:white" onclick="black()" value="Black Background" />
+        @{string und = "_"; string ext = ".jpg"; string ext2 = ".png";}
+        <img id="iframe"
+             src='~/NewFolder2/@Model.Label@und@Model.Reference@und@Model.Combo@und@Model.Buyer@und@Model.dateOfSubmission.ToString("dd-MM-yyyy")@ext'
+             alt="Image not found" onerror="this.onerror = null; src = '/NewFolder2/@Model.Label@und@Model.Reference@und@Model.Combo@und@Model.Buyer@und@Model.dateOfSubmission.ToString("dd-MM-yyyy")@ext2';"
+             style="max-width:400px; max-height:300px" />
+        <script>
+            function white() {
+                $(".right").css("background-color", "white");
+            }
+            function black() {
+                $(".right").css("background-color", "black");
+            }
+            function gray() {
+                $(".right").css("background-color", "gray");
+            }
+            var timeout;
+            $("#iframe").on("load", function () {
+                clearTimeout(timeout);
+                console.log("loaded !");
+            });
+            timeout = setTimeout(function() {
+                $("#iframe").off("load").remove();
+                console.error("image loading failed");
+            }, 60000);
+        </script>
+    </div>
+</div>
