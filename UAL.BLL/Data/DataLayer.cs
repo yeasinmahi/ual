@@ -29,7 +29,7 @@ namespace UAL.BLL.Data
                     return res;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return "";
             }
@@ -83,7 +83,7 @@ namespace UAL.BLL.Data
                 ual.SaveChanges();
                 ret = 1;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 ret = 0;
             }
@@ -305,7 +305,7 @@ namespace UAL.BLL.Data
                     //return 2;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //  HttpContext.Current.Session["PriceUpdate"] = "Update Failed" + ex.ToString();
                 return 0;

@@ -106,7 +106,7 @@ namespace UnitedAccessoriesLimited.Controllers
             pos.IssueDate = DateTime.ParseExact(Request.Form["issuedate"], "dd-MMMM-yyyy", CultureInfo.InvariantCulture);
             
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Session["POCreated"] = "Please fill ISSUE DATE Field with proper value";
                 return View();

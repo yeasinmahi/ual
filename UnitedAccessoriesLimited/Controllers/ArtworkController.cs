@@ -162,7 +162,7 @@ namespace UnitedAccessoriesLimited.Controllers
             ls = dl.getSamples();
             return View(ls);
         }
-        public ActionResult Profile()
+        public new ActionResult Profile()
         {
             if (goToLogin() == false)
                 return RedirectToAction("Login", "Home");

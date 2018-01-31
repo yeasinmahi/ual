@@ -18,7 +18,7 @@ namespace UAL.BLL.Data
                 ual.SaveChanges();
                 return 1;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return 0;
             }
@@ -96,55 +96,44 @@ namespace UAL.BLL.Data
         {
 
             UnitedAccessoriesDBEntities ual = new UnitedAccessoriesDBEntities();
-            try
+            WOSize wos = new WOSize();
+            for (int i = 0; i < size.Length; i++)
             {
-                
-                WOSize wos = new WOSize();
-                for (int i = 0; i < size.Length; i++)
+                switch (i)// this switch case
                 {
-                    switch (i)// this switch case
-                    {
-                        case 0: { wos.sn1 = size[i]; wos.s1 = int.Parse(qty[i]); break; }
-                        case 1: { wos.sn2 = size[i]; wos.s2 = int.Parse(qty[i]); break; }
-                        case 2: { wos.sn3 = size[i]; wos.s3 = int.Parse(qty[i]); break; }
-                        case 3: { wos.sn4 = size[i]; wos.s4 = int.Parse(qty[i]); break; }
-                        case 4: { wos.sn5 = size[i]; wos.s5 = int.Parse(qty[i]); break; }
-                        case 5: { wos.sn6 = size[i]; wos.s6 = int.Parse(qty[i]); break; }
-                        case 6: { wos.sn7 = size[i]; wos.s7 = int.Parse(qty[i]); break; }
-                        case 7: { wos.sn8 = size[i]; wos.s8 = int.Parse(qty[i]); break; }
-                        case 8: { wos.sn9 = size[i]; wos.s9 = int.Parse(qty[i]); break; }
-                        case 9: { wos.sn10 = size[i]; wos.s10 = int.Parse(qty[i]); break; }
-                        case 10: { wos.sn11 = size[i]; wos.s11 = int.Parse(qty[i]); break; }
-                        case 11: { wos.sn12 = size[i]; wos.s12 = int.Parse(qty[i]); break; }
-                        case 12: { wos.sn13 = size[i]; wos.s13 = int.Parse(qty[i]); break; }
-                        case 13: { wos.sn14 = size[i]; wos.s14 = int.Parse(qty[i]); break; }
+                    case 0: { wos.sn1 = size[i]; wos.s1 = int.Parse(qty[i]); break; }
+                    case 1: { wos.sn2 = size[i]; wos.s2 = int.Parse(qty[i]); break; }
+                    case 2: { wos.sn3 = size[i]; wos.s3 = int.Parse(qty[i]); break; }
+                    case 3: { wos.sn4 = size[i]; wos.s4 = int.Parse(qty[i]); break; }
+                    case 4: { wos.sn5 = size[i]; wos.s5 = int.Parse(qty[i]); break; }
+                    case 5: { wos.sn6 = size[i]; wos.s6 = int.Parse(qty[i]); break; }
+                    case 6: { wos.sn7 = size[i]; wos.s7 = int.Parse(qty[i]); break; }
+                    case 7: { wos.sn8 = size[i]; wos.s8 = int.Parse(qty[i]); break; }
+                    case 8: { wos.sn9 = size[i]; wos.s9 = int.Parse(qty[i]); break; }
+                    case 9: { wos.sn10 = size[i]; wos.s10 = int.Parse(qty[i]); break; }
+                    case 10: { wos.sn11 = size[i]; wos.s11 = int.Parse(qty[i]); break; }
+                    case 11: { wos.sn12 = size[i]; wos.s12 = int.Parse(qty[i]); break; }
+                    case 12: { wos.sn13 = size[i]; wos.s13 = int.Parse(qty[i]); break; }
+                    case 13: { wos.sn14 = size[i]; wos.s14 = int.Parse(qty[i]); break; }
                         
-                    }
                 }
-                if (wos.sn1 != null)
-                {
-                    
-                    ual.WOSizes.Add(wos);
-                    ual.SaveChanges();
-                    s.IsSizewise = true;
-                    
-                }
-                else
-                {
-                    s.IsSizewise = false;
-                }
-                s.WOS = ual.WOSizes.Select(m=>m.id).ToList().Last();
-                ual.Sales.Add(s);
-                ual.SaveChanges();
-                return 1;
             }
-            catch(Exception ex)
+            if (wos.sn1 != null)
             {
-                throw ex;
-                
+                    
+                ual.WOSizes.Add(wos);
+                ual.SaveChanges();
+                s.IsSizewise = true;
+                    
             }
-            return 0;
-            
+            else
+            {
+                s.IsSizewise = false;
+            }
+            s.WOS = ual.WOSizes.Select(m=>m.id).ToList().Last();
+            ual.Sales.Add(s);
+            ual.SaveChanges();
+            return 1;
         }
         public int hasSize(string order)
         {
@@ -224,7 +213,7 @@ namespace UAL.BLL.Data
                 ual.SaveChanges();
                 return 1;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return 0;
             }
@@ -256,7 +245,7 @@ namespace UAL.BLL.Data
                 }
             }
             try { ual.SaveChanges(); return 1; }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return 0;
             }
