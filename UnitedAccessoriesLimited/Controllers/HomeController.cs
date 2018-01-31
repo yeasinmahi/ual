@@ -13,8 +13,6 @@ using UAL.BLL.Data;
 //using UnitedAccessoriesLimited.Models;
 //using UAL.BLL.
 
-
-
 namespace UnitedAccessoriesLimited.Controllers
 {
     public class HomeController : BaseController
